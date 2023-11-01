@@ -8,4 +8,4 @@ def simpleCal (x , y):
     
     Returns:
     """
-    return x + y
+    return x * y
