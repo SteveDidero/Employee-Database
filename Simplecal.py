@@ -8,4 +8,5 @@ def simpleCal (x , y):
     Returns:
     """    
     x = 1    
+    y = 2
     
