@@ -6,4 +6,6 @@ def simpleCal (x , y):
         X: the first nummber
         y: the second number
     """
-    
+    def __init__ (self, x, y):
+        self.x = x
+        self.y = y
