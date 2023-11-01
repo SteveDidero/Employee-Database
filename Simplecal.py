@@ -17,4 +17,4 @@ def simpleCal (x , y):
 if __name__ == "__main__":
     print("This program takes two arguments. Both are integers.")
     numbers = sys.argv[1:3]
-    print(simpleCal(numbers[0],numbers[1]))
+    print(simpleCal(int(numbers[0]),int(numbers[1])))
