@@ -5,5 +5,5 @@ def simpleCal (x , y):
     Args:
         X: the first nummber
         y: the second number
-    """
-    
+    """    
+    x = 1
