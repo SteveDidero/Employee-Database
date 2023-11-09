@@ -57,4 +57,15 @@ class Employee:
         if isinstance(employee, Employee):
             self.info = employee.info.copy()
             return
-        
+        self.info = {
+            "id":employee
+            ,"name":name
+            ,"gender":gender
+            ,"dob":dob
+            ,"email":email
+            ,"phone":phone
+            ,"address":address
+            ,"position":position
+            ,"department":department
+            ,"salary":salary
+        }
