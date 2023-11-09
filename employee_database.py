@@ -10,3 +10,21 @@ the Free Software Foundation, either version 3 of the License, or
 """
 # INST326 section 0101
 # Team: Pythonista
+
+class Employee:
+    """The personal information of an employee at a company.
+    
+    Attributes:
+        info (dict): A dictionary containing the following key-value pairs {
+            "id": (int) The employee's ID at the company. Should be unique.
+            "name": (str)
+            "gender": (str) Either "m"an, "w"oman, or "n"onbinary.
+            "dob": (str) Date of birth.
+            "email": (str) Email address.
+            "phone": (str) Phone number.
+            "address": (str) Home address.
+            "position": (str) The employee's job.
+            "department": (str) The employee's department.
+            "salary": (int) Annual gross salary. Non-negative.
+        }
+    """
