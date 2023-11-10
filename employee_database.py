@@ -172,8 +172,15 @@ class Company:
             employees (iterable of int and Employee): Any combination of
                 employee IDs and Employee objects in the employees dict.
         
+        Returns:
+            status code (int): Exactly one of the following (
+                0: All given Employees were written to the file.
+                1: Nothing was written. A given Employee or id did not
+                    match an id in the employees dict.
+            )
+        
         Side effects:
-            Writes to the given file.
+            Overwrites the given file.
         """
         # PLACEHOLDER
         
