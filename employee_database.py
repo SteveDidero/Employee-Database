@@ -11,6 +11,7 @@ the Free Software Foundation, either version 3 of the License, or
 # INST326 section 0101
 # Team: Pythonista
 
+import re
 BAD_VALUES = frozenset({None, ""})
 
 class Employee:
@@ -111,15 +112,45 @@ class Company:
         # PLACEHOLDER
     
     def add_employees_from_file(self, file):
-        """Add multiple Employees from a file.
+        def add_employees_from_file(self, file):
+            """Add multiple Employees from a file using regex pattern for parsing the file.
         PLACEHOLDER. Can use the add_employee() method.
         
-        Primary author: ?
+        Primary author: Jordan Goodman
         
         Args:
-            PLACEHOLDER
+            file (str): A path to the file to read.
+            
+        Side effects: Adds employee information to the employee dictionary.
+
         """
         # PLACEHOLDER
+        with open(file, 'r') as f:
+            employees_to_add = [employee for employee in f]
+            pattern = re.compile(r'(\d+),[ ]?(\w+ \w+),[ ]?([A-Z]+),[ ]?(\d{2}\/\d{2}\/\d{4}),[ ]?(\w+@gmail\.com),[ ]?(\d{3}-\d{3}-\d{4}),[ ]?(\d+ \w+ \w+),[ ]?([\w\s]+),[ ]?([\w\s]+),[ ]?(\$[\d,]+)') 
+        
+        matches = re.search(pattern, employees_to_add) 
+        for match in matches:            
+                employee_id = match[0]
+                name = match[1]
+                gender = match[2]
+                dob = match[3]
+                email = match[4]
+                phone_number = match[5]
+                address = match[6]
+                position = match[7]
+                department = match[8]
+                salary = match[9]
+                self.employees[employee_id] = {"name": name, 
+                                               "gender": gender, 
+                                               "dob": dob, 
+                                               "email": email, 
+                                               "phone number": phone_number, 
+                                               "address": address, 
+                                               "position": position, 
+                                               "department": department,
+                                               "salary": salary}
+        return self.employees
     
     def write_employees_json(self, file, employees):
         """Writes the information of Employees to a file.
