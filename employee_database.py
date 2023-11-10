@@ -127,8 +127,8 @@ class Company:
         
         Args:
             file (str): A path to the JSON to write to.
-            employees (list of int): Any combination of employee IDs and
-                Employee objects in the employees dict.
+            employees (iterable of int and Employee): Any combination of
+                employee IDs and Employee objects in the employees dict.
         
         Side effects:
             Writes to the given file.
