@@ -96,7 +96,7 @@ class Company:
         self.employees_file = employees_file
         self.employees = {}
     
-    def add_employee(self, id, employee, update=False):
+    def add_employee(self, id, PLACEHOLDER):
         """Adds an Employee to the dictionary of employees.
         PLACEHOLDER
         
@@ -104,20 +104,33 @@ class Company:
         
         Args:
             id (int): The ID of the employee.
-            employee (Employee): The employee's corresponding Employee object.
-            update (bool): If update is False, then adding an existing ID will
-                fail. If update is True and the ID exists, then the
-                corresponding Employee will be overwritten.
+            PLACEHOLDER: The information of the employee to be added. Also, any
+            other attributes
         """
         # PLACEHOLDER
     
-    def write_employees_json(self, file, employees, *, add_only=True):
+    def add_employees_from_file(self, file):
+        """Add multiple Employees from a file.
+        PLACEHOLDER. Can use the add_employee() method.
+        
+        Primary author: ?
+        
+        Args:
+            PLACEHOLDER
+        """
+        # PLACEHOLDER
+    
+    def write_employees_json(self, file, employees):
         """Writes the information of Employees to a file.
         
         Primary author: Gene Yu
         
         Args:
-            employees (list of Employee): Any combination of employees in the
-                employees dict.
+            file (str): A path to the JSON to write to.
+            employees (list of int): Any combination of employee IDs and
+                Employee objects in the employees dict.
+        
+        Side effects:
+            Writes to the given file.
         """
         # PLACEHOLDER
