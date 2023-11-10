@@ -17,7 +17,7 @@ BAD_VALUES = frozenset({None, ""})
 class Employee:
     """Represents the personal information of an employee at a company.
     
-    Primary author: ?
+    Primary author: Gene Yu
     
     Attributes:
         info (dict): A dictionary containing the following key-value pairs {
@@ -82,25 +82,38 @@ class Company:
     Primary author: ?
     
     Attributes:
-        PLACEHOLDER
         employees_file (str): A path to the JSON which stores all Employee
-            objects.
+            attributes.
+        managers_file (str): A path to the JSON which stores the Manager ids
+            and respective lists of their subordinates' ids.
         employees (dict of int:Employee): The employee IDs and the corresponding
-            Employee objects.
+            Employee objects. Includes Manager objects.
+        managers (list of int): Employee IDs of the Manager objects according to
+            the ids in the dictionary of employees.
     """
     
-    def __init__(self, employees_file):
-        """PLACEHOLDER
+    def __init__(self, employees_file, managers_file):
+        """Recreates the Company object from the files of employee and manager
+        information.
         
+        INCOMPLETE
         Primary author: ?
+        
+        Args:
+            employees_file (str): A path to the JSON which stores all Employee
+                objects.
+            managers_file (str): A path to the JSON which stores the Manager ids
+                and respective lists of their subordinates' ids.
         """
-        # PLACEHOLDER
         self.employees_file = employees_file
+        self.managers_file = managers_file
         self.employees = {}
+        self.managers = []
+        # INCOMPLETE: Must load and add information from the files to the
+        # attributes.
     
     def add_employee(self, id, PLACEHOLDER):
         """Adds an Employee to the dictionary of employees.
-        PLACEHOLDER
         
         Primary author: ?
         
@@ -112,9 +125,7 @@ class Company:
         # PLACEHOLDER
     
     def add_employees_from_file(self, file):
-        def add_employees_from_file(self, file):
-            """Add multiple Employees from a file using regex pattern for parsing the file.
-        PLACEHOLDER. Can use the add_employee() method.
+        """Add multiple Employees from a file using regex pattern for parsing the file.
         
         Primary author: Jordan Goodman
         
@@ -124,7 +135,6 @@ class Company:
         Side effects: Adds employee information to the employee dictionary.
 
         """
-        # PLACEHOLDER
         with open(file, 'r') as f:
             employees_to_add = [employee for employee in f]
             pattern = re.compile(r'(\d+),[ ]?(\w+ \w+),[ ]?([A-Z]+),[ ]?(\d{2}\/\d{2}\/\d{4}),[ ]?(\w+@gmail\.com),[ ]?(\d{3}-\d{3}-\d{4}),[ ]?(\d+ \w+ \w+),[ ]?([\w\s]+),[ ]?([\w\s]+),[ ]?(\$[\d,]+)') 
