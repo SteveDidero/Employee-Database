@@ -173,8 +173,7 @@ class Company:
         Primary author: Trinity Hill
 
         Args:
-            **criteria: Keyword arguments representing search criteria.
-                        Example: search_employees(name="John", department="IT")
+            search_criteria: Keyword arguments representing search criteria.
 
         Returns:
             list of Employee: A list of employees that match the search criteria.
