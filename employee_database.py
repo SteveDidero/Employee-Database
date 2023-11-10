@@ -74,6 +74,7 @@ class Employee:
             ,"salary":salary
         }
 
+
 class Company:
     """Represents the people in a company.
     
@@ -134,3 +135,14 @@ class Company:
             Writes to the given file.
         """
         # PLACEHOLDER
+
+
+class Manager(Employee):
+    """Represents an employee manager in a Company.
+    
+    Primary author: ?
+    
+    Attributes:
+        subordinates (list of int): The employee IDs of the manager's
+            subordinate Employees.
+    """
