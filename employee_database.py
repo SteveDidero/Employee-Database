@@ -166,7 +166,26 @@ class Company:
             Writes to the given file.
         """
         # PLACEHOLDER
+        
+    def search_employees(self, search_criteria):
+        """Searches for employees based on the given criteria.
+        
+        Primary author: Trinity Hill
 
+        Args:
+            **criteria: Keyword arguments representing search criteria.
+                        Example: search_employees(name="John", department="IT")
+
+        Returns:
+            list of Employee: A list of employees that match the search criteria.
+        """
+        matching_employees = []
+
+        for employee_id, employee in self.employees.items():
+            if all(getattr(employee, key) == value for key, value in search_criteria.items()):
+                matching_employees.append(employee)
+
+        return matching_employees
 
 class Manager(Employee):
     """Represents an employee manager in a Company.
