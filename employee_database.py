@@ -106,8 +106,8 @@ class Company:
             id (int): The ID of the employee.
             employee (Employee): The employee's corresponding Employee object.
             update (bool): If update is False, then adding an existing ID will
-                fail. If update is True, then the Employee tied to the ID will
-                be overwritten.
+                fail. If update is True and the ID exists, then the
+                corresponding Employee will be overwritten.
         """
         # PLACEHOLDER
     
