@@ -112,17 +112,41 @@ class Company:
         # INCOMPLETE: Must load and add information from the files to the
         # attributes.
     
-    def add_employee(self, id, PLACEHOLDER):
+    def add_employee(self, employee_id):
         """Adds an Employee to the dictionary of employees.
         
-        Primary author: ?
+        Primary author: Spencer Morgan
         
         Args:
-            id (int): The ID of the employee.
-            PLACEHOLDER: The information of the employee to be added. Also, any
-            other attributes
+            employee_id (int): The ID of the employee.
+            
+        Side effects:
+            displays the employee who was added to the database.
         """
-        # PLACEHOLDER
+        self.employee_id = employee_id
+
+        name = input("Enter employee name: "),
+        gender =  input("Enter employee gender: "),
+        dob = input("Enter employee date of birth (mm/dd/yyyy): "),
+        email =  input("Enter employee email address: "),
+        phone_number = input("Enter employee phone number(xxx-xxx-xxxx): "),
+        address = input("Enter employee address: "),
+        position = input("Enter employee company position: "),
+        department = input("Enter employee department: "),
+        salary = input("Enter employee salary: ")
+            
+        self.employees[employee_id] = {"name": name,
+                         "gender": gender,
+                         "dob": dob,
+                         "email": email,
+                         "phone_number": phone_number,
+                         "address": address,
+                         "position": position,
+                         "department": department,
+                         "salary": salary
+                         }
+        
+        print(f"{name} was added to employee database")
     
     def add_employees_from_file(self, file):
         """Add multiple Employees from a file using regex pattern for parsing the file.
