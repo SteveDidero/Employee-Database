@@ -20,17 +20,15 @@ class Employee:
     Primary author: Gene Yu
     
     Attributes:
-        info (dict): A dictionary containing the following key-value pairs {
-            "name": (str) The employee's name.
-            "gender": (str) Either "m"an, "w"oman, or "n"onbinary.
-            "dob": (str) Date of birth.
-            "email": (str) Email address.
-            "phone": (str) Phone number.
-            "address": (str) Home address.
-            "position": (str) The employee's job.
-            "department": (str) The employee's department.
-            "salary": (int) Annual gross salary.
-        }
+        name (str): The employee's name.
+        gender (str): Either "m"an, "w"oman, or "n"onbinary.
+        dob (str): Date of birth.
+        email (str): Email address.
+        phone (str): Phone number.
+        address (str): Home address.
+        position (str): The employee's job.
+        department (str): The employee's department.
+        salary (int): Annual gross salary.
     """
     
     def __init__(self, employee, gender="", dob="", email="", phone=""
@@ -52,28 +50,35 @@ class Employee:
             salary: (int) Annual gross salary.
         
         Side effects:
-            Creates and modifies the attribute called info.
+            Creates and modifies all attributes (name, gender, dob, email, phone
+                , address, position, department, and salary).
         """
         if not isinstance(employee, (Employee, str)):
             raise TypeError("The employee arg should be an Employee or an int.")
         if isinstance(employee, str) and ({name, gender, dob, email, phone
                 , address, position, department, salary} & BAD_VALUES):
-            raise ValueError("If an ID is given then the other attributes must"
-                "be non-empty.")
+            raise ValueError("If a name is given as the first arg then all"
+                "attributes must be non-empty.")
         if isinstance(employee, Employee):
-            self.info = employee.info.copy()
+            self.name = employee.name
+            self.gender = employee.gender
+            self.dob = employee.dob
+            self.email = employee.email
+            self.phone = employee.phone
+            self.address = employee.address
+            self.position = employee.position
+            self.department = employee.department
+            self.salary = employee.salary
             return
-        self.info = {
-            "name":employee
-            ,"gender":gender
-            ,"dob":dob
-            ,"email":email
-            ,"phone":phone
-            ,"address":address
-            ,"position":position
-            ,"department":department
-            ,"salary":salary
-        }
+        self.name = employee
+        self.gender = gender
+        self.dob = dob
+        self.email = email
+        self.phone = phone
+        self.address = address
+        self.position = position
+        self.department = department
+        self.salary = salary
     
     def __repr__(self):
         """Gives the formal representation of the Employee instance.
@@ -82,16 +87,18 @@ class Employee:
             (str): A string which when used as the arg for eval() reconstructs
                 this Employee instance.
         """
-        n = self.info["name"]
-        g = self.info["gender"]
-        do = self.info["dob"]
-        e = self.info["email"]
-        ph = self.info["phone"]
-        a = self.info["address"]
-        po = self.info["position"]
-        de = self.info["department"]
-        s = self.info["salary"]
-        return f"Employee({n},{g},{do},{e},{ph},{a},{po},{de},{s})"
+        ordered_info = [
+            self.name
+            ,self.gender
+            ,self.dob
+            ,self.email
+            ,self.phone
+            ,self.address
+            ,self.position
+            ,self.department
+            ,self.salary
+        ]
+        return "Employee(" + ",".join((repr(x) for x in ordered_info)) + ")"
 
 
 class Company:
