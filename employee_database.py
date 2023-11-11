@@ -384,6 +384,7 @@ class Manager(Employee):
     Attributes:
         subordinates (list of int): The employee IDs of the manager's
             subordinate Employees.
+        info (dict): A flexible record of additional Employee information.
     """
     
     def __init__(self, employee):
@@ -396,11 +397,13 @@ class Manager(Employee):
                 Manager object.
         
         Side effects:
-            Recreates the Employee class attributes.
+            Recreates the Employee class attributes. Mirrors those attributes'
+                values into the info attribute.
             Initializes the subordinates attribute.
         """
         super().__init__(employee)
         self.subordinates = []
+        self.info = employee.to_dict()
     
     def add_manager(self):
         """
