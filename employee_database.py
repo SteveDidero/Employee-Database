@@ -379,12 +379,28 @@ class Company:
 class Manager(Employee):
     """Represents an employee manager in a Company.
     
-    Primary author: ?
+    Primary author: Steve Tanekeu
     
     Attributes:
         subordinates (list of int): The employee IDs of the manager's
             subordinate Employees.
     """
+    
+    def __init__(self, employee):
+        """Creates the Manager class from an Employee.
+        
+        Primary author: Gene Yu
+        
+        Args:
+            employee (Employee): The employee to be converted to a Manager.
+        
+        Side effects:
+            Recreates the Employee class attributes.
+            Initializes the subordinates attribute.
+        """
+        super().__init__(employee)
+        self.subordinates = []
+    
     def add_manager(self):
         """
         check the self.info dictionary and if the position of an employee is manager,
