@@ -211,7 +211,8 @@ class Company:
                                                "salary": salary}
         return self.employees
     
-    def write_employees_json(self, file, employees, *, strict=True):
+    def write_employees_json(self, file, employees, *, transaction=True,
+            protect_attributes=True):
         """Writes the information of specified Employees to a file.
         
         Primary author: Gene Yu
@@ -220,15 +221,20 @@ class Company:
             file (str): A path to the JSON to write to.
             employees (iterable of int and Employee): Any combination of
                 employee IDs and Employee objects in the employees dict.
-            strict (bool, keyword-only): Whether the write should fail if the
+            transaction (bool, keyword-only): If True, the write fails if the
                 employees arg contains invalid elements.
+            protect_attributes (bool, keyword-only): If True, the write fails if
+                the file arg is the same as the Company employees file. For
+                use within the Company class internal code only.
         
         Returns:
             (int): A status code. Exactly one of the following (
                 0: All employees specified were written to the file.
-                1: A given Employee or ID did not match an ID in the employees
-                    dict. Nothing was written.
+                1: The user attempted to overwrite the Company employees file.
+                    Nothing was written.
                 2: A given Employee or ID did not match an ID in the employees
+                    dict. Nothing was written.
+                3: A given Employee or ID did not match an ID in the employees
                     dict. Matching employees were written to the file, while
                     non-matching elements were ignored.
             )
@@ -236,6 +242,11 @@ class Company:
         Side effects:
             Overwrites the given file.
         """
+        if protect_attributes:
+            return 1
+        if employees == self.employees:
+            json.dump(self.employees, file)
+            return 0
         employees_set = set(employees)
         ids = {x for x in employees_set if isinstance(x, int)}
         non_ids_set = employees_set - ids
@@ -244,17 +255,20 @@ class Company:
         mismatch = False
         if len(right_type) != len(employees_set):
             mismatch = True
-        if strict and mismatch:
-            return 1
+        if transaction and mismatch:
+            return 2
         all_employee_ids = {v:k for k,v in self.employees.items()}
         matches = ({i for i in ids if i in self.employees}
             | {all_employee_ids[o] for o in obj if o in all_employee_ids})
+        # TODO: Fix the mismatch condition by tracking mismatches. Rewrite the
+        # comprehensions into for loops.
         if len(matches) != len(right_type):
             mismatch = True
-        if strict and mismatch:
+        if transaction and mismatch:
             return 2
+        # TODO: Write the matching employees to the file
         if mismatch:
-            return 1
+            return 3
         return 0
         
     def search_employees(self, search_criteria):
