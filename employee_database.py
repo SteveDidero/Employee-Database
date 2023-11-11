@@ -14,7 +14,7 @@ the Free Software Foundation, either version 3 of the License, or
 import re
 BAD_VALUES = frozenset({None, ""})
 
-class Employee:
+class Employee():
     """Represents the personal information of an employee at a company.
     
     Primary author: Gene Yu
@@ -236,3 +236,42 @@ class Manager(Employee):
         subordinates (list of int): The employee IDs of the manager's
             subordinate Employees.
     """
+    def add_manager(self):
+        """
+        check the self.info dictionary and if the position of an employee is manager,
+        that person gets added to the manager dictionary else they add to the employees dictionary.
+
+        """
+        self.employees = {}
+        self.managers = {}
+        for p in self.info:
+            if p["position"] == "manager":
+                self.managers[p["name"]] = p
+            else:
+                self.employees[p["name"]] = p
+        
+    def assign_employee(self):
+        """
+        Cross check the department of each employment and manager and append the employee's name
+        to the corresponding manager's employee key.
+        """
+
+        for p in self.managers:
+            self.managers[p]["employees"] = []
+
+        for em in self.employees:
+            for i in self.managers:
+                if em['department'] == self.managers[i]['department']:
+                    self.managers[i]["employees"].append(em["name"])
+        
+        name = input('Give me a name: ')
+    
+        for i in self.managers:
+            # for a in i: # This line is not needed
+            if name in self.managers[i]["employees"]:
+                print(f"{name} falls under {i}")
+            else:
+                None        
+
+
+
