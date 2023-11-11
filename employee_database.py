@@ -84,6 +84,8 @@ class Employee():
     def __repr__(self):
         """Gives the formal representation of the Employee instance.
         
+        Primary author: Gene Yu
+        
         Returns:
             (str): A string which when used as the arg for eval() reconstructs
                 this Employee instance.
@@ -100,6 +102,37 @@ class Employee():
             ,self.salary
         ]
         return "Employee(" + ",".join((repr(x) for x in ordered_info)) + ")"
+
+    def to_dict(self):
+        """Gives the dictionary representation of the Employee instance.
+        
+        Primary author: Gene Yu
+        
+        Returns:
+            (dict): A dictionary containing all attributes as key-value pairs
+                in the form "attribute_name":attribute_value.
+        """
+        return {
+            "name":employee
+            ,"gender":gender
+            ,"dob":dob
+            ,"email":email
+            ,"phone":phone
+            ,"address":address
+            ,"position":position
+            ,"department":department
+            ,"salary":salary
+        }
+    
+    def __str__(self):
+        """Gives the informal representation of the Employee instance.
+        
+        Primary author: Gene Yu
+        
+        Returns:
+            (str): The printable representation of the instance.
+        """
+        return str(self.to_dict())
 
 
 class Company:
@@ -122,21 +155,26 @@ class Company:
         """Recreates the Company object from the files of employee and manager
         information.
         
-        INCOMPLETE
-        Primary author: ?
+        Primary author: Gene Yu
         
         Args:
             employees_file (str): A path to the JSON which stores all Employee
                 objects.
-            managers_file (str): A path to the JSON which stores the Manager ids
-                and respective lists of their subordinates' ids.
+        
+        Side effects:
+            Creates and sets the employees_file attribute.
+            Creates and populates the employees attribute.
         """
         self.employees_file = employees_file
-        self.managers_file = managers_file
+        try:
+            employees_dict = json.load(employees_file)
+        except json.JSONDecodeError:
+            employees_dict = {}
         self.employees = {}
-        self.managers = []
-        # INCOMPLETE: Must load and add information from the files to the
-        # attributes.
+        for id,e in employees_dict.items():
+            self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
+                ,e["email"],e["phone"],e["address"],e["position"]
+                ,e["department"],e["salary"])
     
     def add_employee(self, employee_id):
         """Adds an Employee to the dictionary of employees.
@@ -225,13 +263,14 @@ class Company:
             transaction (bool, keyword-only): If True, the write fails if the
                 employees arg contains invalid elements.
             protect_attributes (bool, keyword-only): If True, the write fails if
-                the file arg is the same as the Company employees file. For
-                use within the Company class internal code only.
+                the file arg is the same as the Company employees file but the
+                employees arg is not the same as the employees dictionary.
         
         Returns:
             (int): A status code. Exactly one of the following (
                 0: All employees specified were written to the file.
-                1: The user attempted to overwrite the Company employees file.
+                1: The user attempted to overwrite the Company employees file
+                    with something other than the employees dictionary.
                     Nothing was written.
                 2: A given Employee or ID did not match an ID in the employees
                     dict. Nothing was written.
@@ -243,11 +282,13 @@ class Company:
         Side effects:
             Overwrites the given file.
         """
-        if protect_attributes and file == self.employees_file:
+        if (protect_attributes and file == self.employees_file
+                and employees != self.employees):
             # TODO: If allowed, use os.path.realpath() instead of a string
             # equality comparison
             return 1
         if employees == self.employees:
+            match_dict = {id:str(self.employees[id]) for id in self.employees}
             json.dump(self.employees, file)
             return 0
         employees_set = set(employees)
@@ -277,7 +318,7 @@ class Company:
             mismatch = True
         if transaction and mismatch:
             return 2
-        match_dict = {id:self.employees[id] for id in matches}
+        match_dict = {id:self.employees[id].to_dict() for id in matches}
         json.dump(match_dict, file)
         if mismatch:
             return 3
