@@ -387,12 +387,13 @@ class Manager(Employee):
     """
     
     def __init__(self, employee):
-        """Creates the Manager class from an Employee.
+        """Converts an Employee to a Manager.
         
         Primary author: Gene Yu
         
         Args:
-            employee (Employee): The employee to be converted to a Manager.
+            employee (Employee): The Employee object to be converted to a
+                Manager object.
         
         Side effects:
             Recreates the Employee class attributes.
@@ -436,7 +437,4 @@ class Manager(Employee):
             if name in self.managers[i]["employees"]:
                 print(f"{name} falls under {i}")
             else:
-                None        
-
-
-
+                None
