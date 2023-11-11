@@ -160,6 +160,31 @@ class Company:
         position = input("Enter employee company position: "),
         department = input("Enter employee department: "),
         salary = input("Enter employee salary: ")
+        
+        duplicate_employee = next(
+            (emp for emp in self.employees.values() if emp == {"name": name,
+                                                                "gender": gender,
+                                                                "dob": dob,
+                                                                "email": email,
+                                                                "phone_number": phone_number,
+                                                                "address": address,
+                                                                "position": position,
+                                                                "department": department,
+                                                                "salary": salary}),
+            None
+        )
+
+        if duplicate_employee:
+            print("Duplicate employee data found:")
+            print(f"{duplicate_employee['name']} already exists in the employee database.")
+            decision = input("Would you like to retry?\n"
+                            "Enter 'y' to re-enter data or 'n' to cancel: ")
+
+        if decision.lower() == 'y':
+            self.add_employee(employee_id) 
+        else:
+            print("Employee addition canceled.")
+            return
             
         self.employees[employee_id] = {"name": name,
                          "gender": gender,
