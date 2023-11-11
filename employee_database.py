@@ -11,6 +11,7 @@ the Free Software Foundation, either version 3 of the License, or
 # INST326 section 0101
 # Team: Pythonista
 
+import json
 import re
 BAD_VALUES = frozenset({None, ""})
 
@@ -242,7 +243,9 @@ class Company:
         Side effects:
             Overwrites the given file.
         """
-        if protect_attributes:
+        if protect_attributes and file == self.employees_file:
+            # TODO: If allowed, use os.path.realpath() instead of a string
+            # equality comparison
             return 1
         if employees == self.employees:
             json.dump(self.employees, file)
@@ -257,16 +260,25 @@ class Company:
             mismatch = True
         if transaction and mismatch:
             return 2
-        all_employee_ids = {v:k for k,v in self.employees.items()}
-        matches = ({i for i in ids if i in self.employees}
-            | {all_employee_ids[o] for o in obj if o in all_employee_ids})
-        # TODO: Fix the mismatch condition by tracking mismatches. Rewrite the
-        # comprehensions into for loops.
-        if len(matches) != len(right_type):
+        employee_to_id = {v:k for k,v in self.employees.items()}
+        matches = set()
+        mismatches = set()
+        for id in ids:
+            if id in self.employees:
+                matches.add(id)
+            else:
+                mismatches.add(id)
+        for obj in objs:
+            if obj in employee_to_id:
+                matches.add(employee_to_id(obj))
+            else:
+                mismatches.add(employee_to_id(obj))
+        if mismatches:
             mismatch = True
         if transaction and mismatch:
             return 2
-        # TODO: Write the matching employees to the file
+        match_dict = {id:self.employees[id] for id in matches}
+        json.dump(match_dict, file)
         if mismatch:
             return 3
         return 0
