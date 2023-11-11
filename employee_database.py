@@ -198,6 +198,31 @@ class Company:
         position = input("Enter employee company position: "),
         department = input("Enter employee department: "),
         salary = input("Enter employee salary: ")
+        
+        duplicate_employee = next(
+            (emp for emp in self.employees.values() if emp == {"name": name,
+                                                                "gender": gender,
+                                                                "dob": dob,
+                                                                "email": email,
+                                                                "phone_number": phone_number,
+                                                                "address": address,
+                                                                "position": position,
+                                                                "department": department,
+                                                                "salary": salary}),
+            None
+        )
+
+        if duplicate_employee:
+            print("Duplicate employee data found:")
+            print(f"{duplicate_employee['name']} already exists in the employee database.")
+            decision = input("Would you like to retry?\n"
+                            "Enter 'y' to re-enter data or 'n' to cancel: ")
+
+        if decision.lower() == 'y':
+            self.add_employee(employee_id) 
+        else:
+            print("Employee addition canceled.")
+            return
             
         self.employees[employee_id] = {"name": name,
                          "gender": gender,
@@ -323,22 +348,30 @@ class Company:
         if mismatch:
             return 3
         return 0
-        
-    def search_employees(self, search_criteria):
-        """Searches for employees based on the given criteria.
-        
-        Primary author: Trinity Hill
+    
+    def search_employee(self, first_name=None, last_name=None, department=None):
+        """Search for employees based on the provided criteria.
 
+        Primary author: Trinity Hill
+        
         Args:
-            search_criteria: Keyword arguments representing search criteria.
+            first_name (str, optional): First name of the employee.
+            last_name (str, optional): Last name of the employee.
+            department (str, optional): Department of the employee.
 
         Returns:
-            list of Employee: A list of employees that match the search criteria.
+            List of Employee objects that match the search criteria.
         """
         matching_employees = []
 
         for employee_id, employee in self.employees.items():
-            if all(getattr(employee, key) == value for key, value in search_criteria.items()):
+            match = (
+                (first_name is None or employee.name.split()[0] == first_name) and
+                (last_name is None or employee.name.split()[-1] == last_name) and
+                (department is None or employee.department == department)
+            )
+
+            if match:
                 matching_employees.append(employee)
 
         return matching_employees
