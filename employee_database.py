@@ -74,6 +74,24 @@ class Employee:
             ,"department":department
             ,"salary":salary
         }
+    
+    def __repr__(self):
+        """Gives the formal representation of the Employee instance.
+        
+        Returns:
+            (str): A string which when used as the arg for eval() reconstructs
+                this Employee instance.
+        """
+        n = self.info["name"]
+        g = self.info["gender"]
+        do = self.info["dob"]
+        e = self.info["email"]
+        ph = self.info["phone"]
+        a = self.info["address"]
+        po = self.info["position"]
+        de = self.info["department"]
+        s = self.info["salary"]
+        return f"Employee({n},{g},{do},{e},{ph},{a},{po},{de},{s})"
 
 
 class Company:
@@ -186,8 +204,8 @@ class Company:
                                                "salary": salary}
         return self.employees
     
-    def write_employees_json(self, file, employees):
-        """Writes the information of Employees to a file.
+    def write_employees_json(self, file, employees, *, strict=True):
+        """Writes the information of specified Employees to a file.
         
         Primary author: Gene Yu
         
@@ -195,18 +213,42 @@ class Company:
             file (str): A path to the JSON to write to.
             employees (iterable of int and Employee): Any combination of
                 employee IDs and Employee objects in the employees dict.
+            strict (bool, keyword-only): Whether the write should fail if the
+                employees arg contains invalid elements.
         
         Returns:
             (int): A status code. Exactly one of the following (
-                0: All given Employees were written to the file.
-                1: Nothing was written. A given Employee or id did not
-                    match an id in the employees dict.
+                0: All employees specified were written to the file.
+                1: A given Employee or ID did not match an ID in the employees
+                    dict. Nothing was written.
+                2: A given Employee or ID did not match an ID in the employees
+                    dict. Matching employees were written to the file, while
+                    non-matching elements were ignored.
             )
         
         Side effects:
             Overwrites the given file.
         """
-        # PLACEHOLDER
+        employees_set = set(employees)
+        ids = {x for x in employees_set if isinstance(x, int)}
+        non_ids_set = employees_set - ids
+        objs = {x for x in non_ids_set if isinstance(x, Employee)}
+        right_type = ids + objs
+        mismatch = False
+        if len(right_type) != len(employees_set):
+            mismatch = True
+        if strict and mismatch:
+            return 1
+        all_employee_ids = {v:k for k,v in self.employees.items()}
+        matches = ({i for i in ids if i in self.employees}
+            | {all_employee_ids[o] for o in obj if o in all_employee_ids})
+        if len(matches) != len(right_type):
+            mismatch = True
+        if strict and mismatch:
+            return 2
+        if mismatch:
+            return 1
+        return 0
         
     def search_employees(self, search_criteria):
         """Searches for employees based on the given criteria.
