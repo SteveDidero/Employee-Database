@@ -376,6 +376,9 @@ class Company:
                 matching_employees.append(employee)
 
         return matching_employees
+    
+
+    def 
 
 class Manager(Employee):
     """Represents an employee manager in a Company.
@@ -404,7 +407,8 @@ class Manager(Employee):
         """
         super().__init__(employee)
         self.subordinates = []
-        self.info = employee.to_dict()
+        self.info = {}
+        
     
     def add_manager(self):
         """
@@ -412,9 +416,8 @@ class Manager(Employee):
         that person gets added to the manager dictionary else they add to the employees dictionary.
 
         """
-        self.employees = {}
         self.managers = {}
-        for p in self.info:
+        for p in self.employees:
             if p["position"] == "manager":
                 self.managers[p["name"]] = p
             else:
