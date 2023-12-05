@@ -248,18 +248,34 @@ class Company:
         Side effects: Adds employee information to the employee dictionary.
 
         """
+        """The file contains each employee's information separated by commas. 
+        The expected format for each employee's information is as follows:
+
+        emp_id: Seven digits with three leading zeros.
+        emp_name: First and last name.
+        gender: Single letter.
+        dob: Date of birth in the format "MM/DD/YYYY".
+        email: Email address (only Gmail allowed).
+        phone: Phone number with ten digits separated by dashes.
+        address: Four numbers followed by the street name.
+        position: Capitalized word.
+        department: Capitalized word.
+        salary: Annual gross salary starting with "$" and digits separated by commas.
+        
+        """
         with open(file, 'r') as f:
-            employees_to_add = [employee for employee in f]
+            employees_to_add = f.readlines()
             pattern = re.compile(r'(\d+),[ ]?(\w+ \w+),[ ]?([A-Z]+),[ ]?(\d{2}\/\d{2}\/\d{4}),[ ]?(\w+@gmail\.com),[ ]?(\d{3}-\d{3}-\d{4}),[ ]?(\d+ \w+ \w+),[ ]?([\w\s]+),[ ]?([\w\s]+),[ ]?(\$[\d,]+)') 
         
-        matches = re.search(pattern, employees_to_add) 
-        for match in matches:            
+        matches = [re.search(pattern, employee) for employee in employees_to_add]
+        for match in matches:
+            if match:            
                 employee_id = match[0]
                 name = match[1]
                 gender = match[2]
                 dob = match[3]
                 email = match[4]
-                phone_number = match[5]
+                phone = match[5]
                 address = match[6]
                 position = match[7]
                 department = match[8]
@@ -268,7 +284,7 @@ class Company:
                                                "gender": gender, 
                                                "dob": dob, 
                                                "email": email, 
-                                               "phone number": phone_number, 
+                                               "phone": phone, 
                                                "address": address, 
                                                "position": position, 
                                                "department": department,
