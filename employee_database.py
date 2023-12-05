@@ -112,17 +112,18 @@ class Employee():
             (dict): A dictionary containing all attributes as key-value pairs
                 in the form "attribute_name":attribute_value.
         """
-        return {
-            "name":employee
-            ,"gender":gender
-            ,"dob":dob
-            ,"email":email
-            ,"phone":phone
-            ,"address":address
-            ,"position":position
-            ,"department":department
-            ,"salary":salary
+        info_dict = {
+            "name":self.employee
+            ,"gender":self.gender
+            ,"dob":self.dob
+            ,"email":self.email
+            ,"phone":self.phone
+            ,"address":self.address
+            ,"position":self.position
+            ,"department":self.department
+            ,"salary":self.salary
         }
+        return info_dict
     
     def __str__(self):
         """Gives the informal representation of the Employee instance.
