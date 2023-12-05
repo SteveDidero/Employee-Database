@@ -193,18 +193,18 @@ class Company:
         gender =  input("Enter employee gender: "),
         dob = input("Enter employee date of birth (mm/dd/yyyy): "),
         email =  input("Enter employee email address: "),
-        phone_number = input("Enter employee phone number(xxx-xxx-xxxx): "),
+        phone = input("Enter employee phone number(xxx-xxx-xxxx): "),
         address = input("Enter employee address: "),
         position = input("Enter employee company position: "),
         department = input("Enter employee department: "),
         salary = input("Enter employee salary: ")
         
         duplicate_employee = next(
-            (emp for emp in self.employees.values() if emp == {"name": name,
+            (emp for emp in self.employees.values() if emp.to_dict == {"name": name,
                                                                 "gender": gender,
                                                                 "dob": dob,
                                                                 "email": email,
-                                                                "phone_number": phone_number,
+                                                                "phone_number": phone,
                                                                 "address": address,
                                                                 "position": position,
                                                                 "department": department,
@@ -224,7 +224,7 @@ class Company:
             print("Employee addition canceled.")
             return
             
-        self.employees[employee_id] = Employee(name,gender,dob,email,phone_number,
+        self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
         
         print(f"{name} was added to employee database")
