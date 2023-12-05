@@ -112,18 +112,17 @@ class Employee():
             (dict): A dictionary containing all attributes as key-value pairs
                 in the form "attribute_name":attribute_value.
         """
-        dict_result = {
-            "name":self.employee
-            ,"gender":self.gender
-            ,"dob":self.dob
-            ,"email":self.email
-            ,"phone":self.phone
-            ,"address":self.address
-            ,"position":self.position
-            ,"department":self.department
-            ,"salary":self.salary
+        return {
+            "name":employee
+            ,"gender":gender
+            ,"dob":dob
+            ,"email":email
+            ,"phone":phone
+            ,"address":address
+            ,"position":position
+            ,"department":department
+            ,"salary":salary
         }
-        return dict_result
     
     def __str__(self):
         """Gives the informal representation of the Employee instance.
@@ -225,16 +224,8 @@ class Company:
             print("Employee addition canceled.")
             return
             
-        self.employees[employee_id] = {"name": name,
-                         "gender": gender,
-                         "dob": dob,
-                         "email": email,
-                         "phone_number": phone_number,
-                         "address": address,
-                         "position": position,
-                         "department": department,
-                         "salary": salary
-                         }
+        self.employees[employee_id] = Employee(name,gender,dob,email,phone_number,
+                                               address,position,department,salary)
         
         print(f"{name} was added to employee database")
     
@@ -281,15 +272,8 @@ class Company:
                 position = match[7]
                 department = match[8]
                 salary = match[9]
-                self.employees[employee_id] = {"name": name, 
-                                               "gender": gender, 
-                                               "dob": dob, 
-                                               "email": email, 
-                                               "phone": phone, 
-                                               "address": address, 
-                                               "position": position, 
-                                               "department": department,
-                                               "salary": salary}
+                self.employees[employee_id] = Employee(name,gender,dob,email,phone,
+                                               address,position,department,salary)
         return self.employees
     
     def write_employees_json(self, file, employees, *, transaction=True,
