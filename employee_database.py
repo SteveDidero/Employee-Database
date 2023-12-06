@@ -152,7 +152,7 @@ class Company:
             the ids in the dictionary of employees.
     """
     
-    def __init__(self, employees_file, managers_file):
+    def __init__(self, employees_file=""):
         """Recreates the Company object from the files of employee and manager
         information.
         
@@ -166,8 +166,10 @@ class Company:
             Creates and sets the employees_file attribute.
             Creates and populates the employees attribute.
         """
-        self.managers = {}
-
+        if not employees_file:
+            self.employees = {}
+            self.managers = {}
+            return
         self.employees_file = employees_file
         try:
             employees_dict = json.load(employees_file)
