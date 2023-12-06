@@ -167,6 +167,7 @@ class Company:
             Creates and populates the employees attribute.
         """
         if not employees_file:
+            self.employees_file = "../default_employees_file.txt"
             self.employees = {}
             self.managers = {}
             return
