@@ -17,9 +17,9 @@ BAD_VALUES = frozenset({None, ""})
 
 class Employee():
     """Represents the personal information of an employee at a company.
-    
+
     Primary author: Gene Yu
-    
+
     Attributes:
         name (str): The employee's name.
         gender (str): Either "m"an, "w"oman, or "n"onbinary.
@@ -31,13 +31,13 @@ class Employee():
         department (str): The employee's department.
         salary (int): Annual gross salary.
     """
-    
+
     def __init__(self, employee, gender="", dob="", email="", phone=""
             , address="", position="", department="", salary=-1):
         """Initializes the employee's record.
-        
+
         Primary author: Gene Yu
-        
+
         Args:
             employee: Either a name (str) or an Employee object. The following
                 args must be given if the employee arg is a name.
@@ -49,7 +49,7 @@ class Employee():
             position: (str) The employee's job.
             department: (str) The employee's department.
             salary: (int) Annual gross salary.
-        
+
         Side effects:
             Creates and modifies all attributes (name, gender, dob, email, phone
                 , address, position, department, and salary).
@@ -80,12 +80,12 @@ class Employee():
         self.position = position
         self.department = department
         self.salary = salary
-    
+
     def __repr__(self):
         """Gives the formal representation of the Employee instance.
-        
+
         Primary author: Gene Yu
-        
+
         Returns:
             (str): A string which when used as the arg for eval() reconstructs
                 this Employee instance.
@@ -105,9 +105,9 @@ class Employee():
 
     def to_dict(self):
         """Gives the dictionary representation of the Employee instance.
-        
+
         Primary author: Gene Yu
-        
+
         Returns:
             (dict): A dictionary containing all attributes as key-value pairs
                 in the form "attribute_name":attribute_value.
@@ -124,12 +124,12 @@ class Employee():
             ,"salary":self.salary
         }
         return info_dict
-    
+
     def __str__(self):
         """Gives the informal representation of the Employee instance.
-        
+
         Primary author: Gene Yu
-        
+
         Returns:
             (str): The printable representation of the instance.
         """
@@ -138,9 +138,9 @@ class Employee():
 
 class Company:
     """Represents the people in a company.
-    
+
     Primary author: ?
-    
+
     Attributes:
         employees_file (str): A path to the JSON which stores all Employee
             attributes.
@@ -151,17 +151,17 @@ class Company:
         managers (list of int): Employee IDs of the Manager objects according to
             the ids in the dictionary of employees.
     """
-    
+
     def __init__(self, employees_file=""):
         """Recreates the Company object from the files of employee and manager
         information.
-        
+
         Primary author: Gene Yu
-        
+
         Args:
             employees_file (str): A path to the JSON which stores all Employee
                 objects.
-        
+
         Side effects:
             Creates and sets the employees_file attribute.
             Creates and populates the employees attribute.
@@ -181,15 +181,15 @@ class Company:
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
                 ,e["email"],e["phone"],e["address"],e["position"]
                 ,e["department"],e["salary"])
-    
+
     def add_employee(self, employee_id):
         """Adds an Employee to the dictionary of employees.
-        
+
         Primary author: Spencer Morgan
-        
+
         Args:
             employee_id (int): The ID of the employee.
-            
+
         Side effects:
             displays the employee who was added to the database.
         """
@@ -202,7 +202,7 @@ class Company:
         position = input("Enter employee company position: ")
         department = input("Enter employee department: ")
         salary = input("Enter employee salary: ")
-        
+
         duplicate_employee = next(
             (emp for emp in self.employees.values() if emp.to_dict() == {"name": name,
                                                                 "gender": gender,
@@ -227,24 +227,24 @@ class Company:
             else:
                 print("Employee addition canceled.")
                 return
-            
+
         self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
-        
+
         print(f"{name} was added to employee database")
-    
+
     def add_employees_from_file(self, file):
         """Add multiple Employees from a file using regex pattern for parsing the file.
-        
+
         Primary author: Jordan Goodman
-        
+
         Args:
             file (str): A path to the file to read.
-            
+
         Side effects: Adds employee information to the employee dictionary.
 
         """
-        """The file contains each employee's information separated by commas. 
+        """The file contains each employee's information separated by commas.
         The expected format for each employee's information is as follows:
 
         emp_id: Seven digits with three leading zeros.
@@ -257,15 +257,15 @@ class Company:
         position: Capitalized word.
         department: Capitalized word.
         salary: Annual gross salary starting with "$" and digits separated by commas.
-        
+
         """
         with open(file, 'r') as f:
             employees_to_add = f.readlines()
-            pattern = re.compile(r'(\d+),[ ]?(\w+ \w+),[ ]?([A-Z]+),[ ]?(\d{2}\/\d{2}\/\d{4}),[ ]?(\w+@gmail\.com),[ ]?(\d{3}-\d{3}-\d{4}),[ ]?(\d+ \w+ \w+),[ ]?([\w\s]+),[ ]?([\w\s]+),[ ]?(\$[\d,]+)') 
-        
+            pattern = re.compile(r'(\d+),[ ]?(\w+ \w+),[ ]?([A-Z]+),[ ]?(\d{2}\/\d{2}\/\d{4}),[ ]?(\w+@gmail\.com),[ ]?(\d{3}-\d{3}-\d{4}),[ ]?(\d+ \w+ \w+),[ ]?([\w\s]+),[ ]?([\w\s]+),[ ]?(\$[\d,]+)')
+
         matches = [re.search(pattern, employee) for employee in employees_to_add]
         for match in matches:
-            if match:            
+            if match:
                 employee_id = match[1]
                 name = match[2]
                 gender = match[3]
@@ -279,13 +279,13 @@ class Company:
                 self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
         return self.employees
-    
+
     def write_employees_json(self, file, employees, *, transaction=True,
             protect_attributes=True):
         """Writes the information of specified Employees to a file.
-        
+
         Primary author: Gene Yu
-        
+
         Args:
             file (str): A path to the JSON to write to.
             employees (iterable of int and Employee): Any combination of
@@ -295,7 +295,7 @@ class Company:
             protect_attributes (bool, keyword-only): If True, the write fails if
                 the file arg is the same as the Company employees file but the
                 employees arg is not the same as the employees dictionary.
-        
+
         Returns:
             (int): A status code. Exactly one of the following (
                 0: All employees specified were written to the file.
@@ -308,7 +308,7 @@ class Company:
                     dict. Matching employees were written to the file, while
                     non-matching elements were ignored.
             )
-        
+
         Side effects:
             Overwrites the given file.
         """
@@ -353,12 +353,12 @@ class Company:
         if mismatch:
             return 3
         return 0
-    
+
     def search_employee(self, first_name=None, last_name=None, department=None):
         """Search for employees based on the provided criteria.
 
         Primary author: Trinity Hill
-        
+
         Args:
             first_name (str, optional): First name of the employee.
             last_name (str, optional): Last name of the employee.
@@ -380,29 +380,26 @@ class Company:
                 matching_employees.append(employee)
 
         return matching_employees
-    
+
     def add_manager(self, name):
         """
-        check the self.info dictionary and if the position of an employee is manager,
-        that person gets added to the manager dictionary else they add to the employees dictionary.
 
+        Primary author: Steve Tanekeu
         """
         for i in self.employees.values():
             if i.name == name:
                 self.managers[name] = []
-        
+
     def assign_employee(self, manager, name):
         """
-        Cross check the department of each employment and manager and append the employee's name
-        to the corresponding manager's employee key.
+
+        Primary author: Steve Tanekeu
         """
         if (manager not in self.managers):
-            return "Manager does not exist." 
+            return "Manager does not exist."
 
         for p in self.employees:
             if self.employees[p].name == name:
                 self.managers[manager].append(name)
                 return 'task complete!'
         return 'Name not in the system!'
-    
-        
