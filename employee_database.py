@@ -315,7 +315,7 @@ class Company:
             # equality comparison
             return 1
         if employees == self.employees:
-            match_dict = {id:str(self.employees[id]) for id in self.employees}
+            match_dict = {id:self.employees[id].to_dict() for id in self.employees}
             json.dump(self.employees, file)
             return 0
         employees_set = set(employees)
