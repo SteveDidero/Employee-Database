@@ -208,7 +208,7 @@ class Company:
                                                                 "gender": gender,
                                                                 "dob": dob,
                                                                 "email": email,
-                                                                "phone_number": phone,
+                                                                "phone": phone,
                                                                 "address": address,
                                                                 "position": position,
                                                                 "department": department,
@@ -218,7 +218,7 @@ class Company:
 
         if duplicate_employee:
             print("Duplicate employee data found:")
-            print(f"{duplicate_employee['name']} already exists in the employee database.")
+            print(f"{duplicate_employee.name} already exists in the employee database.")
             decision = input("Would you like to retry?\n"
                             "Enter 'y' to re-enter data or 'n' to cancel: ")
 
@@ -226,7 +226,7 @@ class Company:
                 self.add_employee(employee_id)
             else:
                 print("Employee addition canceled.")
-                return
+            return
 
         self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
