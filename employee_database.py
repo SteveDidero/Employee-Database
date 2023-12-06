@@ -56,7 +56,7 @@ class Employee():
         """
         if not isinstance(employee, (Employee, str)):
             raise TypeError("The employee arg should be an Employee or an int.")
-        if isinstance(employee, str) and ({name, gender, dob, email, phone
+        if isinstance(employee, str) and ({employee, gender, dob, email, phone
                 , address, position, department, salary} & BAD_VALUES):
             raise ValueError("If a name is given as the first arg then all"
                 "attributes must be non-empty.")
