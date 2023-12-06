@@ -1,4 +1,4 @@
-0001234,Jim Johnson,M,10/13/1970,john54@gmail.com,301-555-9876,4309 Cherry Lane,Sales Development Representative,Sales,$80,000
+0001234,Jim Smith,M,10/13/1970,john54@gmail.com,301-555-9876,4309 Cherry Lane,Sales Development Representative,Sales,$80,000
 0001235,Karen Smith,F,01/05/1975, ksmith5@gmail.com,301-555-9833,7563 Mango Road,Hiring Mangager,HR, $90,000
 0001236,Bob Marley,M,08/10/1977, BobMar78@gmail.com,301-555-3622,8429 Pear Road,Sales Development Representative,Sales,$85,000
 0001237,Tristan Housely,M,02/23/1980,Thousely5@gmail.com,240-555-1234,1234 Cookie Drive,Sales Development Representative,Sales,$78,000
