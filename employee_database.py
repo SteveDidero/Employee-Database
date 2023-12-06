@@ -224,11 +224,11 @@ class Company:
             decision = input("Would you like to retry?\n"
                             "Enter 'y' to re-enter data or 'n' to cancel: ")
 
-        if decision.lower() == 'y':
-            self.add_employee(employee_id) 
-        else:
-            print("Employee addition canceled.")
-            return
+            if decision.lower() == 'y':
+                self.add_employee(employee_id) 
+            else:
+                print("Employee addition canceled.")
+                return
             
         self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
