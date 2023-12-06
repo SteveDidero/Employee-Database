@@ -268,16 +268,16 @@ class Company:
         matches = [re.search(pattern, employee) for employee in employees_to_add]
         for match in matches:
             if match:            
-                employee_id = match[0]
-                name = match[1]
-                gender = match[2]
-                dob = match[3]
-                email = match[4]
-                phone = match[5]
-                address = match[6]
-                position = match[7]
-                department = match[8]
-                salary = match[9]
+                employee_id = match[1]
+                name = match[2]
+                gender = match[3]
+                dob = match[4]
+                email = match[5]
+                phone = match[6]
+                address = match[7]
+                position = match[8]
+                department = match[9]
+                salary = match[10]
                 self.employees[employee_id] = Employee(name,gender,dob,email,phone,
                                                address,position,department,salary)
         return self.employees
