@@ -55,7 +55,7 @@ class Employee():
                 , address, position, department, and salary).
         """
         if not isinstance(employee, (Employee, str)):
-            raise TypeError("The employee arg should be an Employee or an int.")
+            raise TypeError("The employee arg should be an Employee or an str.")
         if isinstance(employee, str) and ({employee, gender, dob, email, phone
                 , address, position, department, salary} & BAD_VALUES):
             raise ValueError("If a name is given as the first arg then all"
@@ -193,20 +193,18 @@ class Company:
         Side effects:
             displays the employee who was added to the database.
         """
-        self.employee_id = employee_id
-
-        name = input("Enter employee name: "),
-        gender =  input("Enter employee gender: "),
-        dob = input("Enter employee date of birth (mm/dd/yyyy): "),
-        email =  input("Enter employee email address: "),
-        phone = input("Enter employee phone number(xxx-xxx-xxxx): "),
-        address = input("Enter employee address: "),
-        position = input("Enter employee company position: "),
-        department = input("Enter employee department: "),
+        name = input("Enter employee name: ")
+        gender =  input("Enter employee gender: ")
+        dob = input("Enter employee date of birth (mm/dd/yyyy): ")
+        email =  input("Enter employee email address: ")
+        phone = input("Enter employee phone number(xxx-xxx-xxxx): ")
+        address = input("Enter employee address: ")
+        position = input("Enter employee company position: ")
+        department = input("Enter employee department: ")
         salary = input("Enter employee salary: ")
         
         duplicate_employee = next(
-            (emp for emp in self.employees.values() if emp.to_dict == {"name": name,
+            (emp for emp in self.employees.values() if emp.to_dict() == {"name": name,
                                                                 "gender": gender,
                                                                 "dob": dob,
                                                                 "email": email,
@@ -225,7 +223,7 @@ class Company:
                             "Enter 'y' to re-enter data or 'n' to cancel: ")
 
             if decision.lower() == 'y':
-                self.add_employee(employee_id) 
+                self.add_employee(employee_id)
             else:
                 print("Employee addition canceled.")
                 return
