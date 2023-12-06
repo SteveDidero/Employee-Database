@@ -166,6 +166,8 @@ class Company:
             Creates and sets the employees_file attribute.
             Creates and populates the employees attribute.
         """
+        self.managers = {}
+
         self.employees_file = employees_file
         try:
             employees_dict = json.load(employees_file)
@@ -378,71 +380,28 @@ class Company:
 
         return matching_employees
     
-
-    def 
-
-class Manager(Employee):
-    """Represents an employee manager in a Company.
-    
-    Primary author: Steve Tanekeu
-    
-    Attributes:
-        subordinates (list of int): The employee IDs of the manager's
-            subordinate Employees.
-        info (dict): A flexible record of additional Employee information.
-    """
-    
-    def __init__(self, employee):
-        """Converts an Employee to a Manager.
-        
-        Primary author: Gene Yu
-        
-        Args:
-            employee (Employee): The Employee object to be converted to a
-                Manager object.
-        
-        Side effects:
-            Recreates the Employee class attributes. Mirrors those attributes'
-                values into the info attribute.
-            Initializes the subordinates attribute.
-        """
-        super().__init__(employee)
-        self.subordinates = []
-        self.info = {}
-        
-    
-    def add_manager(self):
+    def add_manager(self, name):
         """
         check the self.info dictionary and if the position of an employee is manager,
         that person gets added to the manager dictionary else they add to the employees dictionary.
 
         """
-        self.managers = {}
-        for p in self.employees:
-            if p["position"] == "manager":
-                self.managers[p["name"]] = p
-            else:
-                self.employees[p["name"]] = p
+        for i in self.employees.values():
+            if i.name == name:
+                self.managers[name] = []
         
-    def assign_employee(self):
+    def assign_employee(self, manager, name):
         """
         Cross check the department of each employment and manager and append the employee's name
         to the corresponding manager's employee key.
         """
+        if (manager not in self.managers):
+            return "Manager does not exist." 
 
-        for p in self.managers:
-            self.managers[p]["employees"] = []
-
-        for em in self.employees:
-            for i in self.managers:
-                if em['department'] == self.managers[i]['department']:
-                    self.managers[i]["employees"].append(em["name"])
-        
-        name = input('Give me a name: ')
+        for p in self.employees:
+            if self.employees[p].name == name:
+                self.managers[manager].append(name)
+                return 'task complete!'
+        return 'Name not in the system!'
     
-        for i in self.managers:
-            # for a in i: # This line is not needed
-            if name in self.managers[i]["employees"]:
-                print(f"{name} falls under {i}")
-            else:
-                None
+        
