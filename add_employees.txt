@@ -5,3 +5,16 @@
 0001238,Karl Marx,M,03/01/1989,kmarx23@gmail.com,703-555-4854,3434 Banana Road,Business Consultant,Finance,$100,000
 0001239,Rebecca Miraj,F,08/04/1986,Bec43Miraj@gmail.com,240-555-5397, 0855 Snow Lane,Business Consultant,Finance,$100,000
 0001240,Karen Brown,F,05/17/1977,Karenb99@gmail.com,202-555-9876,7655 Grape Road,Secretary,Administration,$60,000
+0001241,Charley Smith,N,11/09/1969,smithC4@gmail.com,301-555-3534,6443 Noway Lane, Business Consultant,Finance,$100,000
+0001242,Henrey Allen,N,04/06/1973,allen89h@gmail.com,202-555-4223,6478 North Lane,Sales Development Representative,Sales,$85,000
+0001243,Jennifer Marx,F,08/03/1980,JenMarx13@gmail.com,240-555-3429,9366 Funky Lane,Software Engineer,IT,$130,000
+0001244,Kyle White,M,01/31/1990,48Kylew@gmail.com,240-555-6439,3884 Hilltop Road,Business Consultant,Finance,$111,000
+0001245,Betty Woods,F,09/16/1977,woodsbet67@gmail.com,301-555-8956,5678 Pear Lane,Software Engineer,IT,$130,000
+0001246,Yasmine Brown,F,03/30/1991,yasbrown49@gmail.com,301-555-8644,8765 Mango Road,Hiring Mangager,HR,$97,000
+0001247,Henrey Hall,M,12/25/1978,henhall49@gmail.com,301-555-2432,3833 Spring Road,Software Engineer,IT,$130,000
+0001248,Dakota Chapman,N,10/16/1997,dakota093chap@gmail.com,202-555-9854,8901 West Road,Business Consultant,Finance,$93,000
+0001249,Isaiah Draft,M,05/19/1977,isaiah33d@gmail.com,703-555-7533,0308 East Road,Sales Development Representative,Sales,$95,000
+0001250,Beyonce Knowles,F,06/18/1987,beyonk44@gmail.com,703-555-4885,4444 Renaissance Road,Software Engineer,IT,$130,000
+0001251,Kanye West,M,09/09/1989,ye2388@gmail.com,301-555-9862,4662 Ye Lane,Business Consultant,Finance,$125,000
+0001252,Gilbert Martin,N,06/13/1999,gilbmart@gmail.com,202-555-2224,3994 Egg Lane,Hiring Mangager,HR,$95,000
+0001253,Cassandra Croft,F,4/4/1984,casscroft66@gmail.com,301-555-1234,3722 Turkey Road,Software Engineer,IT,$1320,000
