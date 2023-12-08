@@ -406,6 +406,14 @@ class Company():
                 return f'Task complete. {p} was assigned to {manager}'
         return f'{name} is not an employee in the system!'
 
+    def remove_subordinate(self, manager, name):
+        if manager not in self.managers or :
+            raise ValueError(f"{manager} is a not manager in the system!")
+        if name not in self.managers[manager]:
+            raise ValueError(f'{name} is not a subordinate of {manager}!')
+        self.managers[manager].remove(name)
+        return f"{name} was removed the list of {manager}'s subordinates!"
+
 
 
 def main():
@@ -441,4 +449,3 @@ def main():
     elif answer == 9:
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
-        
