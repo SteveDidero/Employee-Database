@@ -422,14 +422,24 @@ class Company():
             return f"Employee with ID {employee_id} was removed from the database."
         else:
             return f"Employee not found."
+
     def remove_subordinate(self, manager, name):
-        if manager not in self.managers or :
+        if manager not in self.managers:
             raise ValueError(f"{manager} is a not manager in the system!")
         if name not in self.managers[manager]:
             raise ValueError(f'{name} is not a subordinate of {manager}!')
         self.managers[manager].remove(name)
         return f"{name} was removed the list of {manager}'s subordinates!"
 
+    def demote_manager(self, manager):
+        if manager not in managers.keys()
+            raise ValueError(f'{manager} is not a manager!')
+        for m in self.managers:
+            name, subordinate = m, self.managers[m]
+            
+            if name == manager:
+                del manager[name]
+        return f"{manager} was removed!"
 
 
 def main():
