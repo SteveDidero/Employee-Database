@@ -406,6 +406,22 @@ class Company():
                 return f'Task complete. {p} was assigned to {manager}'
         return f'{name} is not an employee in the system!'
 
+    def remove_employee(self, employee_id):
+        """Deletes an employee from the employee dictionary.
+
+        Primary author: Jordan Goodman
+
+        Args:
+            employee_id(int): The ID of the employee.
+
+        Side effects:
+            displays the removed employee from the database.
+        """
+        if employee_id in self.employees:
+            del self.employees[employee_id]
+            print(f"Employee with ID {employee_id} was removed from the database.")
+        else:
+            print("Employee not found.")
 
 
 def main():
