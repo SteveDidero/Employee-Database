@@ -407,6 +407,40 @@ class Company():
                 return f'Task complete. {p} was assigned to {manager}'
         return f'{name} is not an employee in the system!'
 
+    def remove_employee(self, employee_id):
+        """Deletes an employee from the employee dictionary.
+
+        Primary author: Jordan Goodman
+
+        Args:
+            employee_id(int): The ID of the employee.
+
+        Side effects:
+            displays the removed employee from the database.
+        """
+        if employee_id in self.employees:
+            del self.employees[employee_id]
+            return f"Employee with ID {employee_id} was removed from the database."
+        else:
+            return f"Employee not found."
+
+    def remove_subordinate(self, manager, name):
+        if manager not in self.managers:
+            raise ValueError(f"{manager} is a not manager in the system!")
+        if name not in self.managers[manager]:
+            raise ValueError(f'{name} is not a subordinate of {manager}!')
+        self.managers[manager].remove(name)
+        return f"{name} was removed the list of {manager}'s subordinates!"
+
+    def demote_manager(self, manager):
+        if manager not in managers.keys()
+            raise ValueError(f'{manager} is not a manager!')
+        for m in self.managers:
+            name, subordinate = m, self.managers[m]
+            
+            if name == manager:
+                del manager[name]
+        return f"{manager} was removed!"
 
 
 def main():
