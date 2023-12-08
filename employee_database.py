@@ -136,7 +136,7 @@ class Employee():
         return str(self.to_dict())
 
 
-class Company:
+class Company():
     """Represents the people in a company.
 
     Primary author: ?
@@ -389,6 +389,8 @@ class Company:
         for i in self.employees.values():
             if i.name == name:
                 self.managers[name] = []
+                return f'{name} was successfully added!'
+        return f'{name} is not an employee in the system.'
 
     def assign_employee(self, manager, name):
         """
@@ -396,10 +398,47 @@ class Company:
         Primary author: Steve Tanekeu
         """
         if (manager not in self.managers):
-            return "Manager does not exist."
+            return f"Manager {manager} does not exist."
 
         for p in self.employees:
             if self.employees[p].name == name:
                 self.managers[manager].append(name)
-                return 'task complete!'
-        return 'Name not in the system!'
+                return f'Task complete. {p} was assigned to {manager}'
+        return f'{name} is not an employee in the system!'
+
+
+
+def main():
+    com = Company()
+    print("Hello, welcome to INST 326 Employee management data Center!")
+    print("Please review and select from the following options")
+    print("""1: Add employee manually
+             2: Add employee from file
+             3: Add manager
+             4: Assign employee to manager
+             5: Demote manager
+             6: Remove employee
+             7: Remove employee from a manager
+             8: Modify employee data
+             9: Save company data
+             10: Quit
+      """)
+    answer = int(input("Please enter a number: "))
+
+    if answer == 1:
+        id = int(input('Enter an Id for the employee you want to add'))
+        task = com.add_employee(id)
+    elif answer == 2:
+        file = input("Enter your file name(example: myfile.txt): ")
+        task = com.add_employee_from_file(file)
+    elif answer == 3:
+        name = input("Enter the new manager's name")
+        task = com.add_manager(name)
+    elif answer == 4:
+        manager = input("Enter the manager's name: ")
+        name = input("Enter the employee's name: ")
+        task = com.assign_employee(manager, name)
+    elif answer == 9:
+        file = input("Enter your file name(example: myfile.txt): ") 
+        employees = input("Enter your list of employee: ")
+        
