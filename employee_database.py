@@ -419,9 +419,9 @@ class Company():
         """
         if employee_id in self.employees:
             del self.employees[employee_id]
-            print(f"Employee with ID {employee_id} was removed from the database.")
+            return f"Employee with ID {employee_id} was removed from the database."
         else:
-            print("Employee not found.")
+            return f"Employee not found."
 
 
 def main():
