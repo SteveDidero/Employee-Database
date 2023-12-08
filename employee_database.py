@@ -11,6 +11,7 @@ the Free Software Foundation, either version 3 of the License, or
 # INST326 section 0101
 # Team: Pythonista
 
+from argparse import ArgumentParser
 import json
 import re
 BAD_VALUES = frozenset({None, ""})
@@ -442,3 +443,19 @@ def main():
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
         
+def parse_args(args):
+    """Parse command-line arguments.
+    
+    Args:
+        args (int): option for commandline argument to initiate task.
+        
+    Returns:
+        namespace: the parsed arguments, as a namespace.
+    """
+    parser = ArgumentParser(prog="INST 326 Employee Management", 
+                            description="Manage company employee data")
+    parser.add_argument("task", type=int, help="select a task to be completed from the options 1-10")
+    return parser.parse_args(args)
+
+if __name__=="__main__":
+    main()
