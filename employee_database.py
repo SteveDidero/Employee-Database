@@ -514,9 +514,4 @@ def parse_args(args):
     return parser.parse_args(args)
 
 if __name__=="__main__":
-<<<<<<< HEAD
     main()
-=======
-    main()
-    employees = input("Enter your list of employee: ")
->>>>>>> 3ed85341fce247ddf3253881bc72468a46b0a01d
