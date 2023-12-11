@@ -291,7 +291,8 @@ class Company():
         Args:
             file (str): A path to the JSON file to write to.
             protect_ettributes (bool): If True, prohibits writing to the
-                employees_file. Warning: does not consider symlinks.
+                employees_file. Warning: only does a naive string comparison
+                of the file paths.
 
         Returns:
             (int): A status code. Exactly one of the following (
