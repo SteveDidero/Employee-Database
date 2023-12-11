@@ -449,11 +449,13 @@ class Company():
     def demote_manager(self, manager):
         if manager not in self.managers.keys():
             raise ValueError(f'{manager} is not a manager!')
+        name = ''
+        subordinate = ''
         for m in self.managers:
             name, subordinate = m, self.managers[m]
             
-            if name == manager:
-                del manager[name]
+        if name == manager:
+            del self.managers[name]
         return f"{manager} was removed!"
 
 
