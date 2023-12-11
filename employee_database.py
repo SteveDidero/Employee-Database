@@ -13,6 +13,7 @@ the Free Software Foundation, either version 3 of the License, or
 
 from argparse import ArgumentParser
 import json
+from pathlib import Path
 import re
 BAD_VALUES = frozenset({None, ""})
 
@@ -183,10 +184,21 @@ class Company():
             Creates and populates the attributes employees and managers.
         """
         self.employees_file = employees_file
+        emp_path = Path(self.employees_file)
+        if not emp_path.exists() or emp_path.is_dir():
+            self.employees = {}
+            self.managers = {}
+            return
+        with open(self.employees_file, "r", encoding="utf-8") as emp_fp:
+            try:
+                employees_info = json.load(emp_fp)
+            except json.JSONDecodeError:
+                self.employees = {}
+                self.managers = {}
+                return
         try:
-            employees_info = json.load(self.employees_file)
             employees_dict = employees_info["employees"]
-        except (json.JSONDecodeError, KeyError):
+        except KeyError:
             self.employees = {}
             self.managers = {}
             return
