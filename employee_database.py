@@ -11,8 +11,8 @@ the Free Software Foundation, either version 3 of the License, or
 # INST326 section 0101
 # Team: Pythonista
 
-from argparse import ArgumentParser
 import json
+from pathlib import Path
 import re
 BAD_VALUES = frozenset({None, ""})
 
@@ -167,8 +167,22 @@ class Company():
             Creates and sets the employees_file attribute.
             Creates and populates the employees attribute.
         """
-        if not employees_file:
-            self.employees_file = "../default_employees_file.txt"
+        self.employees_file = employees_file
+        emp_path = Path(self.employees_file)
+        if not emp_path.exists() or emp_path.is_dir():
+            self.employees = {}
+            self.managers = {}
+            return
+        with open(self.employees_file, "r", encoding="utf-8") as emp_fp:
+            try:
+                employees_info = json.load(emp_fp)
+            except json.JSONDecodeError:
+                self.employees = {}
+                self.managers = {}
+                return
+        try:
+            employees_dict = employees_info["employees"]
+        except KeyError:
             self.employees = {}
             self.managers = {}
             return
@@ -433,7 +447,7 @@ class Company():
         return f"{name} was removed the list of {manager}'s subordinates!"
 
     def demote_manager(self, manager):
-        if manager not in managers.keys()
+        if manager not in self.managers.keys():
             raise ValueError(f'{manager} is not a manager!')
         for m in self.managers:
             name, subordinate = m, self.managers[m]
@@ -473,23 +487,8 @@ def main():
         manager = input("Enter the manager's name: ")
         name = input("Enter the employee's name: ")
         task = com.assign_employee(manager, name)
+    elif answer == 5:
+        print("nothing")
     elif answer == 9:
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
-        
-def parse_args(args):
-    """Parse command-line arguments.
-    
-    Args:
-        args (int): option for commandline argument to initiate task.
-        
-    Returns:
-        namespace: the parsed arguments, as a namespace.
-    """
-    parser = ArgumentParser(prog="INST 326 Employee Management", 
-                            description="Manage company employee data")
-    parser.add_argument("task", type=int, help="select a task to be completed from the options 1-10")
-    return parser.parse_args(args)
-
-if __name__=="__main__":
-    main()
