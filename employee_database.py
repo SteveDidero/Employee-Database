@@ -492,3 +492,39 @@ def main():
     elif answer == 9:
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
+    elif answer == 8:
+        employee_id = int(input("Enter the employee's ID number: "))
+        if employee_id in com.employees:
+            com.edit_employee(employee_id)
+        else:
+            print(f"No employee found with ID {employee_id}")
+    elif answer == 9:
+        file = input("Enter your file name (example: myfile.txt): ")
+        employees = input("Enter your list of employee: ")
+    elif answer == 10:
+        first_name = input("Enter employee's first name (leave empty if not specified): ")
+        last_name = input("Enter employee's last name (leave empty if not specified): ")
+        department = input("Enter employee's department (leave empty if not specified): ")
+        matching_employees = com.search_employee(first_name, last_name, department)
+    elif answer == 11:
+        print("Thank you for using the Employee Management Data Center")
+    else:
+        print("Invalid option. Please enter a number between 1 and 11.")   
+        
+def parse_args(args):
+    """Parse command-line arguments.
+    
+    Args:
+        args (int): option for commandline argument to initiate task.
+        
+    Returns:
+        namespace: the parsed arguments, as a namespace.
+    """
+    parser = ArgumentParser(prog="INST 326 Employee Management", 
+                            description="Manage company employee data")
+    parser.add_argument("task", type=int, help="select a task to be completed from the options 1-10")
+    return parser.parse_args(args)
+
+if __name__=="__main__":
+    main()
+        employees = input("Enter your list of employee: ")
