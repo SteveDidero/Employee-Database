@@ -11,8 +11,8 @@ the Free Software Foundation, either version 3 of the License, or
 # INST326 section 0101
 # Team: Pythonista
 
-from argparse import ArgumentParser
 import json
+from pathlib import Path
 import re
 BAD_VALUES = frozenset({None, ""})
 
@@ -126,21 +126,6 @@ class Employee():
         }
         return info_dict
 
-    def edit_employee(self, employee_id):
-        if employee_id not in self.employees:
-            print(f"There were no employees with ID {employee_id} found.")
-            return
-
-        employee = self.employees[employee_id]
-
-        updated_values = {}
-        for attr, value in employee.to_dict().items():
-            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
-            updated_values[attr] = updated_value
-
-        employee.update_employee_info(**updated_values)
-        print(f"Employee {employee_id} has been updated.")
-    
     def __str__(self):
         """Gives the informal representation of the Employee instance.
 
@@ -168,7 +153,7 @@ class Company():
             the ids in the dictionary of employees.
     """
 
-    def __init__(self, employees_file="../default_employees_file.txt"):
+    def __init__(self, employees_file=""):
         """Recreates the Company object from the files of employee and manager
         information.
 
@@ -180,20 +165,32 @@ class Company():
 
         Side effects:
             Creates and sets the employees_file attribute.
-            Creates and populates the attributes employees and managers.
+            Creates and populates the employees attribute.
         """
         self.employees_file = employees_file
-        try:
-            employees_info = json.load(self.employees_file)
-            employees_dict = employees_info["employees"]
-        except (json.JSONDecodeError, KeyError):
+        emp_path = Path(self.employees_file)
+        if not emp_path.exists() or emp_path.is_dir():
             self.employees = {}
             self.managers = {}
             return
+        with open(self.employees_file, "r", encoding="utf-8") as emp_fp:
+            try:
+                employees_info = json.load(emp_fp)
+            except json.JSONDecodeError:
+                self.employees = {}
+                self.managers = {}
+                return
         try:
-            managers_dict = employees_info["managers"]
+            employees_dict = employees_info["employees"]
         except KeyError:
+            self.employees = {}
             self.managers = {}
+            return
+        self.employees_file = employees_file
+        try:
+            employees_dict = json.load(employees_file)
+        except json.JSONDecodeError:
+            employees_dict = {}
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
@@ -298,32 +295,78 @@ class Company():
                                                address,position,department,salary)
         return self.employees
 
-    def write_employees_json(self, file, protect_attributes=True):
-        """Writes all employees and managers to a file.
+    def write_employees_json(self, file, employees, *, transaction=True,
+            protect_attributes=True):
+        """Writes the information of specified Employees to a file.
 
         Primary author: Gene Yu
 
         Args:
-            file (str): A path to the JSON file to write to.
-            protect_ettributes (bool): If True, prohibits writing to the
-                employees_file. Warning: only does a naive string comparison
-                of the file paths.
+            file (str): A path to the JSON to write to.
+            employees (iterable of int and Employee): Any combination of
+                employee IDs and Employee objects in the employees dict.
+            transaction (bool, keyword-only): If True, the write fails if the
+                employees arg contains invalid elements.
+            protect_attributes (bool, keyword-only): If True, the write fails if
+                the file arg is the same as the Company employees file but the
+                employees arg is not the same as the employees dictionary.
 
         Returns:
             (int): A status code. Exactly one of the following (
-                0: The write succeeded.
-                1: The write failed because the given file was the same as the
-                    employees_file and protect_attributes was True.
+                0: All employees specified were written to the file.
+                1: The user attempted to overwrite the Company employees file
+                    with something other than the employees dictionary.
+                    Nothing was written.
+                2: A given Employee or ID did not match an ID in the employees
+                    dict. Nothing was written.
+                3: A given Employee or ID did not match an ID in the employees
+                    dict. Matching employees were written to the file, while
+                    non-matching elements were ignored.
             )
 
         Side effects:
             Overwrites the given file.
         """
-        if (protect_attributes and file == self.employees_file):
+        if (protect_attributes and file == self.employees_file
+                and employees != self.employees):
+            # TODO: If allowed, use os.path.realpath() instead of a string
+            # equality comparison
             return 1
-        employees = {id:self.employees[id].to_dict() for id in self.employees}
-        write_info = {"employees":employees, "managers":self.managers}
-        json.dump(write_info, file)
+        if employees == self.employees:
+            match_dict = {id:self.employees[id].to_dict() for id in self.employees}
+            json.dump(self.employees, file)
+            return 0
+        employees_set = set(employees)
+        ids = {x for x in employees_set if isinstance(x, int)}
+        non_ids_set = employees_set - ids
+        objs = {x for x in non_ids_set if isinstance(x, Employee)}
+        right_type = ids + objs
+        mismatch = False
+        if len(right_type) != len(employees_set):
+            mismatch = True
+        if transaction and mismatch:
+            return 2
+        employee_to_id = {v:k for k,v in self.employees.items()}
+        matches = set()
+        mismatches = set()
+        for id in ids:
+            if id in self.employees:
+                matches.add(id)
+            else:
+                mismatches.add(id)
+        for obj in objs:
+            if obj in employee_to_id:
+                matches.add(employee_to_id(obj))
+            else:
+                mismatches.add(employee_to_id(obj))
+        if mismatches:
+            mismatch = True
+        if transaction and mismatch:
+            return 2
+        match_dict = {id:self.employees[id].to_dict() for id in matches}
+        json.dump(match_dict, file)
+        if mismatch:
+            return 3
         return 0
 
     def search_employee(self, first_name=None, last_name=None, department=None):
@@ -339,9 +382,6 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
-        if first_name is None and last_name is None and department is None:
-            return "Please provide at least one search criteria."
-        
         matching_employees = []
 
         for employee_id, employee in self.employees.items():
@@ -355,21 +395,6 @@ class Company():
                 matching_employees.append(employee)
 
         return matching_employees
-
-    def edit_employee(self, employee_id):
-        if employee_id not in self.employees:
-            print(f"No employee found with ID {employee_id}.")
-            return
-
-        employee = self.employees[employee_id]
-
-        updated_attributes = {}
-        for attr, value in employee.to_dict().items():
-            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
-            updated_attributes[attr] = updated_value
-
-        print(f"Employee with ID {employee_id} updated successfully.")
-
 
     def add_manager(self, name):
         """
@@ -422,7 +447,7 @@ class Company():
         return f"{name} was removed the list of {manager}'s subordinates!"
 
     def demote_manager(self, manager):
-        if manager not in managers.keys():
+        if manager not in self.managers.keys():
             raise ValueError(f'{manager} is not a manager!')
         for m in self.managers:
             name, subordinate = m, self.managers[m]
@@ -462,6 +487,8 @@ def main():
         manager = input("Enter the manager's name: ")
         name = input("Enter the employee's name: ")
         task = com.assign_employee(manager, name)
+    elif answer == 5:
+        print("nothing")
     elif answer == 9:
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
@@ -500,3 +527,4 @@ def parse_args(args):
 
 if __name__=="__main__":
     main()
+        employees = input("Enter your list of employee: ")
