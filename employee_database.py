@@ -354,7 +354,7 @@ class Company():
             print("Matching Employees:")
             for employee in matching_employees:
                 print(employee)    
-        return
+            return
 
     def edit_employee(self, employee_id):
         if employee_id not in self.employees:
@@ -459,7 +459,7 @@ def main():
             task = com.add_employee(id)
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
-            task = com.add_employee_from_file(file)
+            task = com.add_employees_from_file(file)
         elif answer == 3:
             name = input("Enter the new manager's name")
             task = com.add_manager(name)
