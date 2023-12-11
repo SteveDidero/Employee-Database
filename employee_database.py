@@ -393,8 +393,26 @@ class Company():
 
             if match:
                 matching_employees.append(employee)
+                
+            print("Matching Employees:")
+            for employee in matching_employees:
+                print(employee)    
+        return
 
-        return matching_employees
+    def edit_employee(self, employee_id):
+        if employee_id not in self.employees:
+            print(f"No employee found with ID {employee_id}.")
+            return
+
+        employee = self.employees[employee_id]
+
+        updated_attributes = {}
+        for attr, value in employee.to_dict().items():
+            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
+            updated_attributes[attr] = updated_value
+
+        self.employees[employee_id] = Employee(updated_attributes)
+        print(f"Employee with ID {employee_id} updated successfully.")
 
     def add_manager(self, name):
         """
@@ -470,7 +488,8 @@ def main():
              7: Remove employee from a manager
              8: Modify employee data
              9: Save company data
-             10: Quit
+             10: Search for an employee
+             11. Quit
       """)
     answer = int(input("Please enter a number: "))
 
@@ -527,4 +546,3 @@ def parse_args(args):
 
 if __name__=="__main__":
     main()
-        employees = input("Enter your list of employee: ")
