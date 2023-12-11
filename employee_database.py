@@ -433,7 +433,7 @@ def main():
     com = Company()
     
     while True:
-        print("\nHello, welcome to INST 326 Employee management data Center!")
+        print("Hello, welcome to INST 326 Employee management data Center!")
         print("Please review and select from the following options")
         print("""1: Add employee manually
                 2: Add employee from file
@@ -521,3 +521,4 @@ def parse_args(args):
 
 if __name__=="__main__":
     main()
+   
