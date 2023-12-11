@@ -337,6 +337,8 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
+        if first_name is None and last_name is None and department is None:
+            return "Please provide at least one search criteria."
         matching_employees = []
 
         for employee_id, employee in self.employees.items():
