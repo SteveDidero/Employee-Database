@@ -434,70 +434,73 @@ class Company():
 
 def main():
     com = Company()
-    print("Hello, welcome to INST 326 Employee management data Center!")
-    print("Please review and select from the following options")
-    print("""1: Add employee manually
-             2: Add employee from file
-             3: Add manager
-             4: Assign employee to manager
-             5: Demote manager
-             6: Remove employee
-             7: Remove employee from a manager
-             8: Modify employee data
-             9: Save company data
-             10: Search for an employee
-             11. Quit
-      """)
-    answer = int(input("Please enter a number: "))
+    
+    while True:
+        print("Hello, welcome to INST 326 Employee management data Center!")
+        print("Please review and select from the following options")
+        print("""1: Add employee manually
+                2: Add employee from file
+                3: Add manager
+                4: Assign employee to manager
+                5: Demote manager
+                6: Remove employee
+                7: Remove employee from a manager
+                8: Modify employee data
+                9: Save company data
+                10: Search for an employee
+                11. Quit
+        """)
+        answer = int(input("Please enter a number: "))
 
-    if answer == 1:
-        id = int(input('Enter an Id for the employee you want to add'))
-        task = com.add_employee(id)
-    elif answer == 2:
-        file = input("Enter your file name(example: myfile.txt): ")
-        task = com.add_employee_from_file(file)
-    elif answer == 3:
-        name = input("Enter the new manager's name")
-        task = com.add_manager(name)
-    elif answer == 4:
-        manager = input("Enter the manager's name: ")
-        name = input("Enter the employee's name: ")
-        task = com.assign_employee(manager, name)
-    elif answer == 5:
-        print("nothing")
-    elif answer == 9:
-        file = input("Enter your file name(example: myfile.txt): ") 
-        employees = input("Enter your list of employee: ")
-    elif answer == 8:
-        employee_id = int(input("Enter the employee's ID number: "))
-        if employee_id in com.employees:
-            com.edit_employee(employee_id)
-        else:
-            print(f"No employee found with ID {employee_id}")
-    elif answer == 9:
-        file = input("Enter the file path to save to. "
-            "The file will be in JSON format.")
-        status = com.write_employees_json(file)
-        if status == 0:
-            print(f"Employees and managers saved to {file}.")
-        elif status == 1:
-            confirm = input(f"Are you sure you want to write to {file}? y/n")
-            if confirm.upper() == "y":
-                com.write_employees_json(file, protect_attributes=False)
+        if answer == 1:
+            id = int(input('Enter an Id for the employee you want to add'))
+            task = com.add_employee(id)
+        elif answer == 2:
+            file = input("Enter your file name(example: myfile.txt): ")
+            task = com.add_employee_from_file(file)
+        elif answer == 3:
+            name = input("Enter the new manager's name")
+            task = com.add_manager(name)
+        elif answer == 4:
+            manager = input("Enter the manager's name: ")
+            name = input("Enter the employee's name: ")
+            task = com.assign_employee(manager, name)
+        elif answer == 5:
+            print("nothing")
+        elif answer == 9:
+            file = input("Enter your file name(example: myfile.txt): ") 
+            employees = input("Enter your list of employee: ")
+        elif answer == 8:
+            employee_id = int(input("Enter the employee's ID number: "))
+            if employee_id in com.employees:
+                com.edit_employee(employee_id)
+            else:
+                print(f"No employee found with ID {employee_id}")
+        elif answer == 9:
+            file = input("Enter the file path to save to. "
+                "The file will be in JSON format.")
+            status = com.write_employees_json(file)
+            if status == 0:
                 print(f"Employees and managers saved to {file}.")
+            elif status == 1:
+                confirm = input(f"Are you sure you want to write to {file}? y/n")
+                if confirm.upper() == "y":
+                    com.write_employees_json(file, protect_attributes=False)
+                    print(f"Employees and managers saved to {file}.")
+                else:
+                    print("Data not saved.")
             else:
                 print("Data not saved.")
+        elif answer == 10:
+            first_name = input("Enter employee's first name (leave empty if not specified): ")
+            last_name = input("Enter employee's last name (leave empty if not specified): ")
+            department = input("Enter employee's department (leave empty if not specified): ")
+            matching_employees = com.search_employee(first_name, last_name, department)
+        elif answer == 11:
+            print("Thank you for using the Employee Management Data Center")
+            break
         else:
-            print("Data not saved.")
-    elif answer == 10:
-        first_name = input("Enter employee's first name (leave empty if not specified): ")
-        last_name = input("Enter employee's last name (leave empty if not specified): ")
-        department = input("Enter employee's department (leave empty if not specified): ")
-        matching_employees = com.search_employee(first_name, last_name, department)
-    elif answer == 11:
-        print("Thank you for using the Employee Management Data Center")
-    else:
-        print("Invalid option. Please enter a number between 1 and 11.")   
+            print("Invalid option. Please enter a number between 1 and 11.")   
         
 def parse_args(args):
     """Parse command-line arguments.
