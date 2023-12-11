@@ -494,6 +494,7 @@ def main():
         last_name = input("Enter employee's last name (leave empty if not specified): ")
         department = input("Enter employee's department (leave empty if not specified): ")
         matching_employees = com.search_employee(first_name, last_name, department)
+        print(matching_employees)
     elif answer == 11:
         print("Thank you for using the Employee Management Data Center")
     else:
@@ -514,9 +515,4 @@ def parse_args(args):
     return parser.parse_args(args)
 
 if __name__=="__main__":
-<<<<<<< HEAD
     main()
-=======
-    main()
-    employees = input("Enter your list of employee: ")
->>>>>>> 3ed85341fce247ddf3253881bc72468a46b0a01d
