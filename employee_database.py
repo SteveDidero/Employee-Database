@@ -59,7 +59,7 @@ class Employee():
             raise TypeError("The employee arg should be an Employee or an str.")
         if isinstance(employee, str) and ({employee, gender, dob, email, phone
                 , address, position, department, salary} & BAD_VALUES):
-            raise ValueError("If a name is given as the first arg then all"
+            raise ValueError("If a name is given as the first arg then all "
                 "attributes must be non-empty.")
         if isinstance(employee, Employee):
             self.name = employee.name
