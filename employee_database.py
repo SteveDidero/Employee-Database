@@ -480,7 +480,9 @@ def main():
         department = input("Enter employee's department (leave empty if not specified): ")
         matching_employees = com.search_employee(first_name, last_name, department)
     elif answer == 11:
-        print("Goodbye!")   
+        print("Thank you for using the Employee Management Data Center")
+    else:
+        print("Invalid option. Please enter a number between 1 and 11.")   
         
 def parse_args(args):
     """Parse command-line arguments.
