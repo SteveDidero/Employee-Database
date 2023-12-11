@@ -59,7 +59,7 @@ class Employee():
             raise TypeError("The employee arg should be an Employee or an str.")
         if isinstance(employee, str) and ({employee, gender, dob, email, phone
                 , address, position, department, salary} & BAD_VALUES):
-            raise ValueError("If a name is given as the first arg then all"
+            raise ValueError("If a name is given as the first arg then all "
                 "attributes must be non-empty.")
         if isinstance(employee, Employee):
             self.name = employee.name
@@ -153,7 +153,7 @@ class Company():
             the ids in the dictionary of employees.
     """
 
-    def __init__(self, employees_file=""):
+    def __init__(self, employees_file="../default_employees_file.json"):
         """Recreates the Company object from the files of employee and manager
         information.
 
@@ -337,6 +337,8 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
+        if first_name is None and last_name is None and department is None:
+            return "Please provide at least one search criteria."
         matching_employees = []
 
         for employee_id, employee in self.employees.items():
