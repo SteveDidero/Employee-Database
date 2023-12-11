@@ -153,7 +153,7 @@ class Company():
             the ids in the dictionary of employees.
     """
 
-    def __init__(self, employees_file=""):
+    def __init__(self, employees_file="../default_employees_file.json"):
         """Recreates the Company object from the files of employee and manager
         information.
 
