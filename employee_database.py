@@ -126,6 +126,21 @@ class Employee():
         }
         return info_dict
 
+    def edit_employee(self, employee_id):
+        if employee_id not in self.employees:
+            print(f"There were no employees with ID {employee_id} found.")
+            return
+
+        employee = self.employees[employee_id]
+
+        updated_values = {}
+        for attr, value in employee.to_dict().items():
+            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
+            updated_values[attr] = updated_value
+
+        employee.update_employee_info(**updated_values)
+        print(f"Employee {employee_id} has been updated.")
+    
     def __str__(self):
         """Gives the informal representation of the Employee instance.
 
@@ -368,6 +383,9 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
+        if first_name is None and last_name is None and department is None:
+            return "Please provide at least one search criteria."
+        
         matching_employees = []
 
         for employee_id, employee in self.employees.items():
@@ -381,6 +399,21 @@ class Company():
                 matching_employees.append(employee)
 
         return matching_employees
+
+    def edit_employee(self, employee_id):
+        if employee_id not in self.employees:
+            print(f"No employee found with ID {employee_id}.")
+            return
+
+        employee = self.employees[employee_id]
+
+        updated_attributes = {}
+        for attr, value in employee.to_dict().items():
+            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
+            updated_attributes[attr] = updated_value
+
+        print(f"Employee with ID {employee_id} updated successfully.")
+
 
     def add_manager(self, name):
         """
@@ -433,7 +466,7 @@ class Company():
         return f"{name} was removed the list of {manager}'s subordinates!"
 
     def demote_manager(self, manager):
-        if manager not in managers.keys()
+        if manager not in managers.keys():
             raise ValueError(f'{manager} is not a manager!')
         for m in self.managers:
             name, subordinate = m, self.managers[m]
