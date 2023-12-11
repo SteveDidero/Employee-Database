@@ -10,7 +10,7 @@ the Free Software Foundation, either version 3 of the License, or
 """
 # INST326 section 0101
 # Team: Pythonista
-
+from argparse import ArgumentParser
 import json
 from pathlib import Path
 import re
@@ -295,78 +295,33 @@ class Company():
                                                address,position,department,salary)
         return self.employees
 
-    def write_employees_json(self, file, employees, *, transaction=True,
-            protect_attributes=True):
-        """Writes the information of specified Employees to a file.
+    def write_employees_json(self, file, protect_attributes=True):
+        """Writes all employees and managers to a file.
 
         Primary author: Gene Yu
 
         Args:
-            file (str): A path to the JSON to write to.
-            employees (iterable of int and Employee): Any combination of
-                employee IDs and Employee objects in the employees dict.
-            transaction (bool, keyword-only): If True, the write fails if the
-                employees arg contains invalid elements.
-            protect_attributes (bool, keyword-only): If True, the write fails if
-                the file arg is the same as the Company employees file but the
-                employees arg is not the same as the employees dictionary.
+            file (str): A path to the JSON file to write to.
+            protect_ettributes (bool): If True, prohibits writing to the
+                employees_file. Warning: only does a naive string comparison
+                of the file paths.
 
         Returns:
             (int): A status code. Exactly one of the following (
-                0: All employees specified were written to the file.
-                1: The user attempted to overwrite the Company employees file
-                    with something other than the employees dictionary.
-                    Nothing was written.
-                2: A given Employee or ID did not match an ID in the employees
-                    dict. Nothing was written.
-                3: A given Employee or ID did not match an ID in the employees
-                    dict. Matching employees were written to the file, while
-                    non-matching elements were ignored.
+                0: The write succeeded.
+                1: The write failed because the given file was the same as the
+                    employees_file and protect_attributes was True.
             )
 
         Side effects:
             Overwrites the given file.
         """
-        if (protect_attributes and file == self.employees_file
-                and employees != self.employees):
-            # TODO: If allowed, use os.path.realpath() instead of a string
-            # equality comparison
+        if (protect_attributes and file == self.employees_file):
             return 1
-        if employees == self.employees:
-            match_dict = {id:self.employees[id].to_dict() for id in self.employees}
-            json.dump(self.employees, file)
-            return 0
-        employees_set = set(employees)
-        ids = {x for x in employees_set if isinstance(x, int)}
-        non_ids_set = employees_set - ids
-        objs = {x for x in non_ids_set if isinstance(x, Employee)}
-        right_type = ids + objs
-        mismatch = False
-        if len(right_type) != len(employees_set):
-            mismatch = True
-        if transaction and mismatch:
-            return 2
-        employee_to_id = {v:k for k,v in self.employees.items()}
-        matches = set()
-        mismatches = set()
-        for id in ids:
-            if id in self.employees:
-                matches.add(id)
-            else:
-                mismatches.add(id)
-        for obj in objs:
-            if obj in employee_to_id:
-                matches.add(employee_to_id(obj))
-            else:
-                mismatches.add(employee_to_id(obj))
-        if mismatches:
-            mismatch = True
-        if transaction and mismatch:
-            return 2
-        match_dict = {id:self.employees[id].to_dict() for id in matches}
-        json.dump(match_dict, file)
-        if mismatch:
-            return 3
+        employees = {id:self.employees[id].to_dict() for id in self.employees}
+        write_info = {"employees":employees, "managers":self.managers}
+        with open(file, "w", encoding="utf-8") as write_fp:
+            json.dump(write_info, write_fp)
         return 0
 
     def search_employee(self, first_name=None, last_name=None, department=None):
@@ -494,3 +449,51 @@ def main():
     elif answer == 9:
         file = input("Enter your file name(example: myfile.txt): ") 
         employees = input("Enter your list of employee: ")
+    elif answer == 8:
+        employee_id = int(input("Enter the employee's ID number: "))
+        if employee_id in com.employees:
+            com.edit_employee(employee_id)
+        else:
+            print(f"No employee found with ID {employee_id}")
+    elif answer == 9:
+        file = input("Enter the file path to save to. "
+            "The file will be in JSON format.")
+        status = com.write_employees_json(file)
+        if status == 0:
+            print(f"Employees and managers saved to {file}.")
+        elif status == 1:
+            confirm = input(f"Are you sure you want to write to {file}? y/n")
+            if confirm.upper() == "y":
+                com.write_employees_json(file, protect_attributes=False)
+                print(f"Employees and managers saved to {file}.")
+            else:
+                print("Data not saved.")
+        else:
+            print("Data not saved.")
+    elif answer == 10:
+        first_name = input("Enter employee's first name (leave empty if not specified): ")
+        last_name = input("Enter employee's last name (leave empty if not specified): ")
+        department = input("Enter employee's department (leave empty if not specified): ")
+        matching_employees = com.search_employee(first_name, last_name, department)
+    elif answer == 11:
+        print("Thank you for using the Employee Management Data Center")
+    else:
+        print("Invalid option. Please enter a number between 1 and 11.")   
+        
+def parse_args(args):
+    """Parse command-line arguments.
+    
+    Args:
+        args (int): option for commandline argument to initiate task.
+        
+    Returns:
+        namespace: the parsed arguments, as a namespace.
+    """
+    parser = ArgumentParser(prog="INST 326 Employee Management", 
+                            description="Manage company employee data")
+    parser.add_argument("task", type=int, help="select a task to be completed from the options 1-10")
+    return parser.parse_args(args)
+
+if __name__=="__main__":
+    main()
+    employees = input("Enter your list of employee: ")
