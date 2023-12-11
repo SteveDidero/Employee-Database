@@ -471,9 +471,6 @@ def main():
             task = com.assign_employee(manager, name)
         elif answer == 5:
             print("nothing")
-        elif answer == 9:
-            file = input("Enter your file name(example: myfile.txt): ") 
-            employees = input("Enter your list of employee: ")
         elif answer == 8:
             employee_id = int(input("Enter the employee's ID number: "))
             if employee_id in com.employees:
