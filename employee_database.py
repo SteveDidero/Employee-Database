@@ -463,6 +463,7 @@ def main():
             confirm = input(f"Are you sure you want to write to {file}? y/n")
             if confirm.upper() == "y":
                 com.write_employees_json(file, protect_attributes=False)
+                print(f"Employees and managers saved to {file}.")
             else:
                 print("Data not saved.")
         else:
