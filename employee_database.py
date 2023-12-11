@@ -350,11 +350,8 @@ class Company():
 
             if match:
                 matching_employees.append(employee)
-                
-            print("Matching Employees:")
-            for employee in matching_employees:
-                print(employee)    
-        return
+                   
+        return matching_employees
 
     def edit_employee(self, employee_id):
         if employee_id not in self.employees:
@@ -367,8 +364,6 @@ class Company():
         for attr, value in employee.to_dict().items():
             updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
             updated_attributes[attr] = updated_value
-
-        self.employees[employee_id] = Employee(updated_attributes)
         print(f"Employee with ID {employee_id} updated successfully.")
 
     def add_manager(self, name):
@@ -438,7 +433,7 @@ def main():
     com = Company()
     
     while True:
-        print("\nHello, welcome to INST 326 Employee management data Center!")
+        print("Hello, welcome to INST 326 Employee management data Center!")
         print("Please review and select from the following options")
         print("""1: Add employee manually
                 2: Add employee from file
@@ -498,6 +493,12 @@ def main():
             last_name = input("Enter employee's last name (leave empty if not specified): ")
             department = input("Enter employee's department (leave empty if not specified): ")
             matching_employees = com.search_employee(first_name, last_name, department)
+            if matching_employees:   
+                print("Matching Employees:")
+                for employee in matching_employees:
+                    print(employee) 
+            else:
+                print("No employees found with the specified criteria.")
         elif answer == 11:
             print("Thank you for using the Employee Management Data Center")
             break
@@ -520,3 +521,4 @@ def parse_args(args):
 
 if __name__=="__main__":
     main()
+   
