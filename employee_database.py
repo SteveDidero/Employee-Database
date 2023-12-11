@@ -454,8 +454,19 @@ def main():
         else:
             print(f"No employee found with ID {employee_id}")
     elif answer == 9:
-        file = input("Enter your file name (example: myfile.txt): ")
-        employees = input("Enter your list of employee: ")
+        file = input("Enter the file path to save to. "
+            "The file will be in JSON format.")
+        status = com.write_employees_json(file)
+        if status == 0:
+            print(f"Employees and managers saved to {file}.")
+        elif status == 1:
+            confirm = input(f"Are you sure you want to write to {file}? y/n")
+            if confirm.upper() == "y":
+                com.write_employees_json(file, protect_attributes=False)
+            else:
+                print("Data not saved.")
+        else:
+            print("Data not saved.")
     elif answer == 10:
         first_name = input("Enter employee's first name (leave empty if not specified): ")
         last_name = input("Enter employee's last name (leave empty if not specified): ")
@@ -482,4 +493,4 @@ def parse_args(args):
 
 if __name__=="__main__":
     main()
-        employees = input("Enter your list of employee: ")
+    employees = input("Enter your list of employee: ")
