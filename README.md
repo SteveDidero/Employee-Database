@@ -51,17 +51,45 @@
    12: Print all managers
    99. Quit
    ```
-4. Step 3
-5. Step 4
-6. Step 5
-7. Step 6
-8. Step 7
-9. Step 8
-10. Step 9
-11. Step 10
+3. Option 1: Add employee manually:
+   * name (First Last)
+   * gender 
+   * dob (mm/dd/yyyy)
+   * email 
+   * phone(xxx-xxx-xxxx)
+   * address 
+   * position 
+   * department 
+   * salary 
+4. Option 2: Add employee from file:
+   * filename
+5. Option 3: Add manager:
+   * manager name (First Last)
+6. Option 4: Assign employee to manager:
+   * manger name (First Last)
+   * employee name (First Last)
+7. Option 5: Demote manger:
+   * manager name (First Last)
+8. Option 6: Remove employee:
+   * employee id of individual to be removed.
+9. Option 7: Remove employee from manager:
+   * manager name (First Last)
+   * employee name (First Last)
+10. Option 8: Modify employee data:
+   * employee id of individual to be modified
+11. Option 9: Save Company Data:
+   * save data added
+12. Option 10: Search for an employee:
+   * search for an employee by name (First Last)
+13. Option 11: Print all employees:
+   * show all employees in database
+14. Option 12: Print all managers:
+   * show all managers in database
+15. Option 99: Quit
+   * Exits program
 
 ## How to use the program and interpret the output
-* program use
+* progam
 * output
 
 
