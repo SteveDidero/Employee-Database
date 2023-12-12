@@ -456,7 +456,7 @@ def main(file=""):
     
     while True:
         print("Here are your options")
-        print("""                1: Add employee manually
+        print("""1: Add employee manually
                 2: Add employee from file
                 3: Add manager
                 4: Assign employee to manager
