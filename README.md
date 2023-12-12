@@ -108,12 +108,12 @@
 | :---------------------------- | :------------- | :-------------------------------------- |
 |Company.write_employees_json   |Gene Yu         |json.load()                              |
 |Company.add_employees_from_file|Jordan Goodman  |Regular Expressions,With statements      |
-|Company.search_employees       |Trinity Hill    |Optional parameters (keyword arguments)  |
+|Company.search_employee        |Trinity Hill    |Optional parameters (keyword arguments)  |
 |Company.remove_subordinate     |Steve Tanekeu   |f-strings                                |
 |Company.add_employee           |Spencer Morgan  |Generator expression                     |
 |Employee.\_\_repr\_\_          |Gene Yu         |Magic methods other than \_\_init\_\_()  |
-|Company.remove_employees       |Jordan Goodman  |Conditional statement                    |
-|Edit employee attributes       |Trinity Hill    |Conditional Expression                                 |
+|Company.remove_employees       |Jordan Goodman  |with statement                           |
+|Edit employee attributes       |Trinity Hill    |Conditional Expression                   |
 |Company.demote_manager         |Steve Tanekeu   |Sequence unpacking                       |
 |parse_args                     |Spencer Morgan  |ArgumentParser                           |
   
