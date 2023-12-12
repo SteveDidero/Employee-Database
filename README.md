@@ -34,16 +34,31 @@
     10. Salary
     
 ## Instructions to run a program from the command line
-1. Step 1......(in-progress)
-2. Step 2
-3. Step 3
-4. Step 4
-5. Step 5
-6. Step 6
-7. Step 7
-8. Step 8
-9. Step 9
-10. Step 10
+1. Provide a file to be created and written to save employee data. 
+2. Select the task to be completed from the following options:
+   ```python
+   1: Add employee manually
+   2: Add employee from file
+   3: Add manager
+   4: Assign employee to manager
+   5: Demote manager
+   6: Remove employee
+   7: Remove employee from a manager
+   8: Modify employee data
+   9: Save company data
+   10: Search for an employee
+   11: Print all employees
+   12: Print all managers
+   99. Quit
+   ```
+4. Step 3
+5. Step 4
+6. Step 5
+7. Step 6
+8. Step 7
+9. Step 8
+10. Step 9
+11. Step 10
 
 ## How to use the program and interpret the output
 * program use
