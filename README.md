@@ -113,7 +113,7 @@
 |Company.add_employee           |Spencer Morgan  |Generator expression                     |
 |Employee.\_\_repr\_\_          |Gene Yu         |Magic methods other than \_\_init\_\_()  |
 |Company.remove_employees       |Jordan Goodman  |Conditional statement                    |
-|Edit employee attributes       |Trinity Hill    |                                         |
+|Edit employee attributes       |Trinity Hill    |Conditional Expression                                 |
 |Company.demote_manager         |Steve Tanekeu   |Sequence unpacking                       |
 |parse_args                     |Spencer Morgan  |ArgumentParser                           |
   
