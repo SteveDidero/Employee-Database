@@ -26,12 +26,12 @@
     2. Name (First and Last name: ex. Jim Smith)
     3. Gender (F, M, or N)
     4. Birthdate (MM/DD/YYY: ex. 10/13/1970)
-    5. Email Address (@gmail.com: john54@gmail.com)
-    6. Phone Number (xxx-xxx-xxxx: 301-555-9876)
-    7. Mailing Address (3722 Turkey Road)
+    5. Email Address (@gmail.com: ex. john54@gmail.com)
+    6. Phone Number (xxx-xxx-xxxx: ex. 301-555-9876)
+    7. Mailing Address (House # followed by Street Name: ex. 3722 Turkey Road)
     8. Position
     9. Department
-    10. Salary (include $ and commas: ex.85,000)
+    10. Salary (include $ at beginning and use commas: ex. $85,000)
 
 ## Instructions to run a program from the command line
 1. Provide a file to be created and written to save employee data. 
