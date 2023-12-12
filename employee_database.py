@@ -432,8 +432,10 @@ class Company():
         return f"{manager} was removed!"
 
 
-def main():
-    com = Company()
+def main(file=""):
+    if not file:
+        file = "../default_employees_file.json"
+    com = Company(file)
     
     while True:
         print("Hello, welcome to INST 326 Employee management data Center!")
@@ -530,5 +532,5 @@ def parse_args(args):
     return parser.parse_args(args)
 
 if __name__=="__main__":
-    main()
+    main(parse_args(sys.argv[1:]).file)
    
