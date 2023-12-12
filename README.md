@@ -22,15 +22,16 @@
     7. git status
 4. **add_employees.txt**
   * Text file with employee information to be added to the company database. Information is as follows:
-    1. Name
-    2. Gender
-    3. Birthdate
-    4. Email Address
-    5. Phone Number
-    6. Mailing Address
-    7. Position
-    8. Department
-    9. Salary
+    1. Employee ID
+    2. Name
+    3. Gender
+    4. Birthdate
+    5. Email Address
+    6. Phone Number
+    7. Mailing Address
+    8. Position
+    9. Department
+    10. Salary
     
 ## Instructions to run a program from the command line
 1. Step 1......(in-progress)
