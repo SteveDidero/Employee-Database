@@ -186,12 +186,6 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
-        try:
-            managers_dict = employees_info["managers"]
-        except KeyError:
-            self.managers = {}
-        else:
-            self.managers = managers_dict
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
@@ -344,9 +338,9 @@ class Company():
 
         for employee_id, employee in self.employees.items():
             match = (
-                (first_name is None or employee.name.split()[0] == first_name) and
-                (last_name is None or employee.name.split()[-1] == last_name) and
-                (department is None or employee.department == department)
+                (not first_name or employee.name.split()[0] == first_name) and
+                (not last_name or employee.name.split()[-1] == last_name) and
+                (not department or employee.department == department)
             )
 
             if match:
@@ -492,8 +486,8 @@ def main():
             first_name = input("Enter employee's first name (leave empty if not specified): ").strip()
             last_name = input("Enter employee's last name (leave empty if not specified): ").strip()
             department = input("Enter employee's department (leave empty if not specified): ").strip()
-            matching_employees = com.search_employee(first_name, last_name, department)
-            print(matching_employees)
+            matching = com.search_employee(first_name, last_name, department)
+            print(matching)
         elif answer == 11:
             print("Thank you for using the Employee Management Data Center")
             break
