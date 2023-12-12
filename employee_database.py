@@ -362,12 +362,13 @@ class Company():
 
         employee = self.employees[employee_id]
 
-        updated_attributes = {}
+        UA = {}
         for attr, value in employee.to_dict().items():
-            updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
-            updated_attributes[attr] = updated_value
+            values = input(f"Enter updated {attr} (press Enter to skip): ")
+            updated_value = values if values else value
+            UA[attr] = updated_value 
 
-        self.employees[employee_id] = Employee(updated_attributes)
+        self.employees[employee_id] = Employee(UA['name'], UA['gender'], UA['dob'], UA['email'], UA['phone'], UA['address'], UA['position'], UA['department'], UA['salary'])
         print(f"Employee with ID {employee_id} updated successfully.")
 
     def add_manager(self, name):
@@ -418,7 +419,7 @@ class Company():
         if name not in self.managers[manager]:
             raise ValueError(f'{name} is not a subordinate of {manager}!')
         self.managers[manager].remove(name)
-        return f"{name} was removed the list of {manager}'s subordinates!"
+        return f"{name} was removed from the list of {manager}'s subordinates!"
 
     def demote_manager(self, manager):
         if manager not in self.managers.keys():
@@ -492,7 +493,7 @@ def main(file=""):
             print("Task complete!")
         elif answer == 5:
             name = input("Enter the manager's name: ")
-            task = com.demote_manager('name')
+            task = com.demote_manager(name)
             print(task)
             print("Task complete!")
         elif answer == 6:
@@ -507,7 +508,7 @@ def main(file=""):
             print(task)
             print("Task complete!")
         elif answer == 8:
-            employee_id = int(input("Enter the employee's ID number: "))
+            employee_id = str(int(input("Enter the employee's ID number: ")))
             if employee_id in com.employees:
                 com.edit_employee(employee_id)
             else:
