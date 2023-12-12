@@ -368,7 +368,7 @@ class Company():
             updated_value = values if values else value
             UA[attr] = updated_value 
 
-        self.employees[employee_id] = Employee(UA)
+        self.employees[employee_id] = Employee(UA['name'], UA['gender'], UA['dob'], UA['email'], UA['phone'], UA['address'], UA['position'], UA['department'], UA['salary'])
         print(f"Employee with ID {employee_id} updated successfully.")
 
     def add_manager(self, name):
