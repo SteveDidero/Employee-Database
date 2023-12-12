@@ -34,7 +34,7 @@
     10. Salary (include $ at beginning and use commas: ex. $85,000)
 
 ## Instructions to run a program from the command line
-1. Provide a file to be created and written to save employee data. 
+1. Run the program by providing a file in which to save employee data: `python employee_database.py store_here.json`
 2. Select the task to be completed from the following options:
    ```python
    1: Add employee manually
