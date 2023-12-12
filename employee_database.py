@@ -186,6 +186,12 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
+        try:
+            managers_dict = employees_info["managers"]
+        except KeyError:
+            self.managers = {}
+        else:
+            self.managers = managers_dict
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
