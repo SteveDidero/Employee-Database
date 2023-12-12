@@ -389,9 +389,16 @@ class Company():
         return f'{name} is not an employee in the system.'
 
     def assign_employee(self, manager, name):
-        """
-
+        """Assigns an employee to a manager.
+        
         Primary author: Steve Tanekeu
+        
+        Args:
+            manager (str): The name of a manager in the managers attribute.
+            name (str): The name of an employee in the employees attribute.
+        
+        Returns:
+            (str): A string indicating whether the employee was assigned.
         """
         if (manager not in self.managers):
             return f"Manager {manager} does not exist."
@@ -441,6 +448,16 @@ class Company():
 
 
 def main(file=""):
+    """Runs the menu of the program.
+    
+    Primary author: Steve Tanekeu
+    
+    Args:
+        file (str): The path to the file for storing the employee data.
+    
+    Side effects:
+        Prints to sysout.
+    """
     if not file:
         file = "../default_employees_file.json"
     com = Company(file)
@@ -557,6 +574,8 @@ def main(file=""):
         
 def parse_args(args):
     """Parse command-line arguments.
+    
+    Primary author: Spencer Morgan
     
     Args:
         args (str): command line argument.
