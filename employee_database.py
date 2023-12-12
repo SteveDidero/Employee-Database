@@ -186,6 +186,12 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
+        try:
+            managers_dict = employees_info["managers"]
+        except KeyError:
+            self.managers = {}
+        else:
+            self.managers = managers_dict
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
@@ -468,7 +474,7 @@ def main():
             else:
                 print(f"No employee found with ID {employee_id}")
         elif answer == 9:
-            file = input("Enter the file path to save to. Enter nothing to use"
+            file = input("Enter the file path to save to. Enter nothing to use "
                 "the current database file. The file will be in JSON format. ")
             if not file:
                 file = com.employees_file
