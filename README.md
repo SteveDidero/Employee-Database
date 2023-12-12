@@ -90,7 +90,18 @@
 
 ## How to use the program and interpret the output
 * progam
+  1. Run the script in a Python environment.
+  2. The program presents a menu with options ranging from adding employees to searching for them.
+  3. Users input the corresponding number for the desired task.
+  4. Depending on the selected task, the program may prompt for additional information, such as employee details or file paths.
+  5. Users can interactively manage employee data within the command-line interface.
 * output
+  The output is designed to inform users about the status of their requests and the state of the employee and manager data in the company.
+  The program outputs information based on user input and the performed tasks.
+    Examples of output include 
+    * confirmation messages for adding employees, 
+    * success/failure messages for file operations, and information about assigned or removed employees.
+    * Error messages are displayed if invalid input or operations are detected.
 
 
 |Method/function                |Primary author  |Techniques demonstrated                  |
