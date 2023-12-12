@@ -493,7 +493,7 @@ def main(file=""):
             task = com.demote_manager('name')
             print('Task complete!')
         elif answer == 6:
-            Id = input("Enter the employee's ID")
+            Id = input("Enter the employee's ID: ")
             task = com.remove_employee(Id)
             print("task complete!")
         elif answer == 7:
@@ -509,7 +509,7 @@ def main(file=""):
                 print(f"No employee found with ID {employee_id}")
         elif answer == 9:
             file = input("Enter the file path to save to. Enter nothing to use "
-                "the current database file. The file will be in JSON format. ")
+                "the current database file. The file will be in JSON format: ")
             if not file:
                 file = com.employees_file
             status = com.write_employees_json(file)
@@ -517,7 +517,7 @@ def main(file=""):
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
                 confirm = input(
-                    f"Are you sure you want to write to {file}? y/n ")
+                    f"Are you sure you want to write to {file}? y/n: ")
                 if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
