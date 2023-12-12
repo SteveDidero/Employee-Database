@@ -52,15 +52,15 @@
    99. Quit
    ```
 3. Option 1: Add employee manually:
-   * name (First Last)
-   * gender 
-   * dob (mm/dd/yyyy)
-   * email 
-   * phone(xxx-xxx-xxxx)
-   * address 
-   * position 
-   * department 
-   * salary 
+   * Name (First and Last name: ex. Jim Smith)
+   * Gender (F, M, or N)
+   * Birthdate (MM/DD/YYY: ex. 10/13/1970)
+   * Email Address (@gmail.com: ex. john54@gmail.com)
+   * Phone Number (xxx-xxx-xxxx: ex. 301-555-9876)
+   * Mailing Address (House # followed by Street Name: ex. 3722 Turkey Road)
+   * Position
+   * Department
+   * Salary (include $ at beginning and use commas: ex. $85,000)
 4. Option 2: Add employee from file:
    * filename
 5. Option 3: Add manager:
