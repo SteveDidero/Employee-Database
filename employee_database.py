@@ -14,6 +14,7 @@ from argparse import ArgumentParser
 import json
 from pathlib import Path
 import re
+import sys
 BAD_VALUES = frozenset({None, ""})
 
 class Employee():
@@ -432,8 +433,10 @@ class Company():
         return f"{manager} was removed!"
 
 
-def main():
-    com = Company()
+def main(file=""):
+    if not file:
+        file = "../default_employees_file.json"
+    com = Company(file)
     
     while True:
         print("Hello, welcome to INST 326 Employee management data Center!")
@@ -453,9 +456,9 @@ def main():
         answer = int(input("Please enter a number: "))
 
         if answer == 1:
-            id = int(input('Enter an Id for the employee you want to add'))
-            task = com.add_employee(id)
-            print(task)
+            id = int(input('Enter an Id for the employee you want to add: '))
+            com.add_employee(id)
+            print("Task complete!")
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
             task = com.add_employees_from_file(file)
@@ -530,5 +533,5 @@ def parse_args(args):
     return parser.parse_args(args)
 
 if __name__=="__main__":
-    main()
+    main(parse_args(sys.argv[1:]).file)
    
