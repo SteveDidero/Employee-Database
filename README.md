@@ -109,7 +109,7 @@
 |Company.write_employees_json   |Gene Yu         |json.load()                              |
 |Company.add_employees_from_file|Jordan Goodman  |Regular Expressions                      |
 |Company.search_employee        |Trinity Hill    |Optional parameters (keyword arguments)  |
-|Edit employee attributes       |Trinity Hill    |With statement                           |
+|Company.search_employee        |Trinity Hill    |With statement                           |
 |Company.remove_subordinate     |Steve Tanekeu   |f-strings                                |
 |Company.add_employee           |Spencer Morgan  |Generator expression                     |
 |Employee.\_\_repr\_\_          |Gene Yu         |Magic methods other than \_\_init\_\_()  |
