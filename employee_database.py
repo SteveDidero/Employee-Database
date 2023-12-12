@@ -131,7 +131,6 @@ class Employee():
         """Gives the informal representation of the Employee instance.
 
         Primary author: Gene Yu
-        Technique: magic methods other than __init__()
 
         Returns:
             (str): The printable representation of the instance.
@@ -142,7 +141,7 @@ class Employee():
 class Company():
     """Represents the people in a company.
 
-    Primary author: N/A
+    Primary author: ?
 
     Attributes:
         employees_file (str): A path to the JSON which stores all Employee
@@ -204,7 +203,6 @@ class Company():
         """Adds an Employee to the dictionary of employees.
 
         Primary author: Spencer Morgan
-        Technique: generator expression
 
         Args:
             employee_id (int): The ID of the employee.
@@ -256,8 +254,6 @@ class Company():
         """Add multiple Employees from a file using regex pattern for parsing the file.
 
         Primary author: Jordan Goodman
-        Technique: regular expression
-        Technique: with statement
 
         Args:
             file (str): A path to the file to read.
@@ -305,7 +301,6 @@ class Company():
         """Writes all employees and managers to a file.
 
         Primary author: Gene Yu
-        Technique: use of json.dump()
 
         Args:
             file (str): A path to the JSON file to write to.
@@ -335,7 +330,6 @@ class Company():
         """Search for employees based on the provided criteria.
 
         Primary author: Trinity Hill
-        Technique: optional parameters and/or keyword arguments
 
         Args:
             first_name (str, optional): First name of the employee.
@@ -362,6 +356,15 @@ class Company():
         return matching_employees
 
     def edit_employee(self, employee_id):
+        """
+        edit the attribute of an employee
+
+        Args: 
+            employee_id(str): the id of the employee as int in a form of str
+
+        Returns:
+            nothing.
+        """
         if employee_id not in self.employees:
             print(f"No employee found with ID {employee_id}.")
             return
@@ -379,6 +382,13 @@ class Company():
 
     def add_manager(self, name):
         """
+        add a manager to the manager dictionary
+
+        Args:
+            name(str): the name of the manager being add.
+        
+        Returns:
+            a message stating the status of the program
 
         Primary author: Steve Tanekeu
         """
@@ -389,16 +399,17 @@ class Company():
         return f'{name} is not an employee in the system.'
 
     def assign_employee(self, manager, name):
-        """Assigns an employee to a manager.
-        
-        Primary author: Steve Tanekeu
-        
+        """
+        assign a employee to a manager
+
         Args:
-            manager (str): The name of a manager in the managers attribute.
-            name (str): The name of an employee in the employees attribute.
+            manager(Str): the name of the manager
+            name(str): the name of the employee beind to the manager
         
-        Returns:
-            (str): A string indicating whether the employee was assigned.
+        Retuns:
+            a message to confirm the shows the status of the program
+
+        Primary author: Steve Tanekeu
         """
         if (manager not in self.managers):
             return f"Manager {manager} does not exist."
@@ -419,6 +430,9 @@ class Company():
 
         Side effects:
             displays the removed employee from the database.
+        
+        Returns:
+            a message to confirm the completion of the program or prompt an error.
         """
         if employee_id in self.employees:
             del self.employees[employee_id]
@@ -427,6 +441,19 @@ class Company():
             return f"Employee not found."
 
     def remove_subordinate(self, manager, name):
+        """
+        remove the subordinate of a manager from the manager dictionary
+
+        Args:
+            manager(Str): the name of the manager
+            name(Str): the name of the employee being removed
+        
+        Raises:
+            valueErrors: raise valueError if the manager's name is not a key in the manager dictionary or if the employee being removed is not a subordinate of said manager.
+        
+        Returns:
+            a message to confirm the completion of the task.
+        """
         if manager not in self.managers:
             raise ValueError(f"{manager} is a not manager in the system!")
         if name not in self.managers[manager]:
@@ -435,6 +462,18 @@ class Company():
         return f"{name} was removed from the list of {manager}'s subordinates!"
 
     def demote_manager(self, manager):
+        """
+        Demote a manager from the compary and delete them from the managers dictionary along with their subordinate.
+
+        Args: 
+            manager(str): the name of the manager
+        
+        Raises:
+            valueError: raises a valueError if the name of the manager is not a key in the manager dictionry.
+
+        Returns:
+            a message to confirm the completion of the task in f string format
+        """
         if manager not in self.managers.keys():
             raise ValueError(f'{manager} is not a manager!')
         name = ''
@@ -448,15 +487,8 @@ class Company():
 
 
 def main(file=""):
-    """Runs the menu of the program.
-    
-    Primary author: Steve Tanekeu
-    
-    Args:
-        file (str): The path to the file for storing the employee data.
-    
-    Side effects:
-        Prints to sysout.
+    """
+    Controls the flow of the database
     """
     if not file:
         file = "../default_employees_file.json"
@@ -574,8 +606,6 @@ def main(file=""):
         
 def parse_args(args):
     """Parse command-line arguments.
-    
-    Primary author: Spencer Morgan
     
     Args:
         args (str): command line argument.
