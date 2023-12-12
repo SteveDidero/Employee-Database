@@ -2,7 +2,7 @@
 
 ## Existing files in the repository and their purpose
 1. **employee_database.py**
-  * What the employee_database.py file does......in-progress
+  * Program is used to manage employee data for companies of various sizes.
 2. **example_script.py**
   * Python script for demonstration. Completes the following tasks:
      1. Creates employees from file.
