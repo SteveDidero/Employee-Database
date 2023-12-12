@@ -480,24 +480,29 @@ def main(file=""):
         elif answer == 3:
             name = input("Enter the new manager's name: ")
             task = com.add_manager(name)
-            print("Task complete")
+            print(task)
+            print("Task complete!")
         elif answer == 4:
             manager = input("Enter the manager's name: ")
             name = input("Enter the employee's full name: ")
             task = com.assign_employee(manager, name)
+            print(task)
             print("Task complete!")
         elif answer == 5:
             name = input("Enter the manager's name: ")
             task = com.demote_manager('name')
-            print('Task complete!')
+            print(task)
+            print("Task complete!")
         elif answer == 6:
             Id = input("Enter the employee's ID")
             task = com.remove_employee(Id)
-            print("task complete!")
+            print(task)
+            print("Task complete!")
         elif answer == 7:
             manager = input("Enter the manager's name: ")
             em_name = input("Enter the name of the employee: ")
             task = com.remove_subordinate(manager, em_name)
+            print(task)
             print("Task complete!")
         elif answer == 8:
             employee_id = int(input("Enter the employee's ID number: "))
