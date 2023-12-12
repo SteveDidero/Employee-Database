@@ -488,7 +488,7 @@ class Company():
 
 def main(file=""):
     """
-    Controls the flow of the database
+    Controls the flow of the database.
     """
     if not file:
         file = "../default_employees_file.json"
