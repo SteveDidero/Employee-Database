@@ -131,6 +131,7 @@ class Employee():
         """Gives the informal representation of the Employee instance.
 
         Primary author: Gene Yu
+        Technique: magic methods other than __init__()
 
         Returns:
             (str): The printable representation of the instance.
@@ -141,7 +142,7 @@ class Employee():
 class Company():
     """Represents the people in a company.
 
-    Primary author: ?
+    Primary author: N/A
 
     Attributes:
         employees_file (str): A path to the JSON which stores all Employee
@@ -203,6 +204,7 @@ class Company():
         """Adds an Employee to the dictionary of employees.
 
         Primary author: Spencer Morgan
+        Technique: generator expression
 
         Args:
             employee_id (int): The ID of the employee.
@@ -254,6 +256,8 @@ class Company():
         """Add multiple Employees from a file using regex pattern for parsing the file.
 
         Primary author: Jordan Goodman
+        Technique: regular expression
+        Technique: with statement
 
         Args:
             file (str): A path to the file to read.
@@ -301,6 +305,7 @@ class Company():
         """Writes all employees and managers to a file.
 
         Primary author: Gene Yu
+        Technique: use of json.dump()
 
         Args:
             file (str): A path to the JSON file to write to.
@@ -330,6 +335,7 @@ class Company():
         """Search for employees based on the provided criteria.
 
         Primary author: Trinity Hill
+        Technique: optional parameters and/or keyword arguments
 
         Args:
             first_name (str, optional): First name of the employee.
@@ -383,9 +389,16 @@ class Company():
         return f'{name} is not an employee in the system.'
 
     def assign_employee(self, manager, name):
-        """
-
+        """Assigns an employee to a manager.
+        
         Primary author: Steve Tanekeu
+        
+        Args:
+            manager (str): The name of a manager in the managers attribute.
+            name (str): The name of an employee in the employees attribute.
+        
+        Returns:
+            (str): A string indicating whether the employee was assigned.
         """
         if (manager not in self.managers):
             return f"Manager {manager} does not exist."
@@ -435,6 +448,16 @@ class Company():
 
 
 def main(file=""):
+    """Runs the menu of the program.
+    
+    Primary author: Steve Tanekeu
+    
+    Args:
+        file (str): The path to the file for storing the employee data.
+    
+    Side effects:
+        Prints to sysout.
+    """
     if not file:
         file = "../default_employees_file.json"
     com = Company(file)
@@ -551,6 +574,8 @@ def main(file=""):
         
 def parse_args(args):
     """Parse command-line arguments.
+    
+    Primary author: Spencer Morgan
     
     Args:
         args (str): command line argument.
