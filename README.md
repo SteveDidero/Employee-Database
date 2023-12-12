@@ -54,6 +54,7 @@
 | :---------------------------- | :------------- | :-------------------------------------- |
 |Company.write_employees_json   |Gene Yu         |json.load()                              |
 |Company.add_employees_from_file|Jordan Goodman  |Regular Expressions                      |
+|Company.add_employees_from_file|Jordan Goodman  |With statement                           |
 |Company.search_employees       |Trinity Hill    |Optional parameters (keyword arguments)  |
 |Company.remove_subordinate     |Steve Tanekeu   |f-strings                                |
 |Company.add_employee           |Spencer Morgan  |Generator expression                     |
