@@ -58,7 +58,7 @@
 |Company.remove_subordinate     |Steve Tanekeu   |f-strings                                |
 |Company.add_employee           |Spencer Morgan  |Generator expression                     |
 |Employee.\_\_repr\_\_          |Gene Yu         |Magic methods other than \_\_init\_\_()  |
-|Company.remove_employees       |Jordan Goodman  |Conditional expression                   |
+|Company.remove_employees       |Jordan Goodman  |Conditional statement                    |
 |Edit employee attributes       |Trinity Hill    |                                         |
 |Company.demote_manager         |Steve Tanekeu   |Sequence unpacking                       |
 |parse_args                     |Spencer Morgan  |ArgumentParser                           |
