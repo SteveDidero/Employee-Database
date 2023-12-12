@@ -468,13 +468,16 @@ def main():
             else:
                 print(f"No employee found with ID {employee_id}")
         elif answer == 9:
-            file = input("Enter the file path to save to. "
-                "The file will be in JSON format.")
+            file = input("Enter the file path to save to. Enter nothing to use"
+                "the current database file. The file will be in JSON format. ")
+            if not file:
+                file = com.employees_file
             status = com.write_employees_json(file)
             if status == 0:
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
-                confirm = input(f"Are you sure you want to write to {file}? y/n")
+                confirm = input(
+                    f"Are you sure you want to write to {file}? y/n ")
                 if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
