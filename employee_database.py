@@ -186,11 +186,6 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
-        self.employees_file = employees_file
-        try:
-            employees_dict = json.load(employees_file)
-        except json.JSONDecodeError:
-            employees_dict = {}
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
