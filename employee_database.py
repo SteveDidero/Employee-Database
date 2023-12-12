@@ -340,7 +340,7 @@ class Company():
         """
         if not first_name and not last_name and not department:
             return "Please provide at least one search criteria."
-        matching_employees = []
+        matching_employees = {}
 
         for employee_id, employee in self.employees.items():
             match = (
@@ -350,7 +350,7 @@ class Company():
             )
 
             if match:
-                matching_employees.append(employee)
+                matching_employees[employee_id] = employee
                    
         return matching_employees
 
