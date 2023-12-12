@@ -350,11 +350,6 @@ class Company():
 
             if match:
                 matching_employees.append(employee)
-                
-            print("Matching Employees:")
-            for employee in matching_employees:
-                print(employee)    
-            return
                    
         return matching_employees
 
@@ -497,6 +492,7 @@ def main():
             last_name = input("Enter employee's last name (leave empty if not specified): ").strip()
             department = input("Enter employee's department (leave empty if not specified): ").strip()
             matching_employees = com.search_employee(first_name, last_name, department)
+            print(matching_employees)
         elif answer == 11:
             print("Thank you for using the Employee Management Data Center")
             break
