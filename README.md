@@ -21,18 +21,18 @@
     6. git fetch
     7. git status
 4. **add_employees.txt**
-  * Text file with employee information to be added to the company database. Information is as follows:
-    1. Employee ID
-    2. Name
-    3. Gender
-    4. Birthdate
-    5. Email Address
-    6. Phone Number
-    7. Mailing Address
+  * Text file with employee information to be added to the company database. Information is as follows (separated by commas with no spaces):
+    1. Employee ID (7 digits: ex. 0001234)
+    2. Name (First and Last name: ex. Jim Smith)
+    3. Gender (F, M, or N)
+    4. Birthdate (MM/DD/YYY: ex. 10/13/1970)
+    5. Email Address (@gmail.com: john54@gmail.com)
+    6. Phone Number (xxx-xxx-xxxx: 301-555-9876)
+    7. Mailing Address (3722 Turkey Road)
     8. Position
     9. Department
-    10. Salary
-    
+    10. Salary (include $ and commas: ex.85,000)
+
 ## Instructions to run a program from the command line
 1. Provide a file to be created and written to save employee data. 
 2. Select the task to be completed from the following options:
