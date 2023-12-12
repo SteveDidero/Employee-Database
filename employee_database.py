@@ -186,11 +186,12 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
-        self.employees_file = employees_file
         try:
-            employees_dict = json.load(employees_file)
-        except json.JSONDecodeError:
-            employees_dict = {}
+            managers_dict = employees_info["managers"]
+        except KeyError:
+            self.managers = {}
+        else:
+            self.managers = managers_dict
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
@@ -337,7 +338,7 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
-        if first_name is None and last_name is None and department is None:
+        if not first_name and not last_name and not department:
             return "Please provide at least one search criteria."
         matching_employees = []
 
@@ -364,6 +365,8 @@ class Company():
         for attr, value in employee.to_dict().items():
             updated_value = input(f"Enter updated {attr} (press Enter to skip): ") or value
             updated_attributes[attr] = updated_value
+
+        self.employees[employee_id] = Employee(updated_attributes)
         print(f"Employee with ID {employee_id} updated successfully.")
 
     def add_manager(self, name):
@@ -454,7 +457,7 @@ def main():
             task = com.add_employee(id)
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
-            task = com.add_employee_from_file(file)
+            task = com.add_employees_from_file(file)
         elif answer == 3:
             name = input("Enter the new manager's name")
             task = com.add_manager(name)
@@ -464,9 +467,6 @@ def main():
             task = com.assign_employee(manager, name)
         elif answer == 5:
             print("nothing")
-        elif answer == 9:
-            file = input("Enter your file name(example: myfile.txt): ") 
-            employees = input("Enter your list of employee: ")
         elif answer == 8:
             employee_id = int(input("Enter the employee's ID number: "))
             if employee_id in com.employees:
@@ -481,7 +481,7 @@ def main():
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
                 confirm = input(f"Are you sure you want to write to {file}? y/n")
-                if confirm.upper() == "y":
+                if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
                 else:
@@ -489,16 +489,11 @@ def main():
             else:
                 print("Data not saved.")
         elif answer == 10:
-            first_name = input("Enter employee's first name (leave empty if not specified): ")
-            last_name = input("Enter employee's last name (leave empty if not specified): ")
-            department = input("Enter employee's department (leave empty if not specified): ")
+            first_name = input("Enter employee's first name (leave empty if not specified): ").strip()
+            last_name = input("Enter employee's last name (leave empty if not specified): ").strip()
+            department = input("Enter employee's department (leave empty if not specified): ").strip()
             matching_employees = com.search_employee(first_name, last_name, department)
-            if matching_employees:   
-                print("Matching Employees:")
-                for employee in matching_employees:
-                    print(employee) 
-            else:
-                print("No employees found with the specified criteria.")
+            print(matching_employees)
         elif answer == 11:
             print("Thank you for using the Employee Management Data Center")
             break
