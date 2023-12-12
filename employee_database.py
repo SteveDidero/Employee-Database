@@ -337,7 +337,7 @@ class Company():
         Returns:
             List of Employee objects that match the search criteria.
         """
-        if first_name is None and last_name is None and department is None:
+        if not first_name and not last_name and not department:
             return "Please provide at least one search criteria."
         matching_employees = []
 
@@ -493,9 +493,9 @@ def main():
             else:
                 print("Data not saved.")
         elif answer == 10:
-            first_name = input("Enter employee's first name (leave empty if not specified): ")
-            last_name = input("Enter employee's last name (leave empty if not specified): ")
-            department = input("Enter employee's department (leave empty if not specified): ")
+            first_name = input("Enter employee's first name (leave empty if not specified): ").strip()
+            last_name = input("Enter employee's last name (leave empty if not specified): ").strip()
+            department = input("Enter employee's department (leave empty if not specified): ").strip()
             matching_employees = com.search_employee(first_name, last_name, department)
         elif answer == 11:
             print("Thank you for using the Employee Management Data Center")
