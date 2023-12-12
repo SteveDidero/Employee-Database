@@ -104,18 +104,18 @@
     * Error messages are displayed if invalid input or operations are detected.
 
 
-|Method/function                |Primary author  |Techniques demonstrated                  |
-| :---------------------------- | :------------- | :-------------------------------------- |
-|Company.write_employees_json   |Gene Yu         |json.load()                              |
-|Company.add_employees_from_file|Jordan Goodman  |Regular Expressions,With statements      |
-|Company.search_employees       |Trinity Hill    |Optional parameters (keyword arguments)  |
-|Company.remove_subordinate     |Steve Tanekeu   |f-strings                                |
-|Company.add_employee           |Spencer Morgan  |Generator expression                     |
-|Employee.\_\_repr\_\_          |Gene Yu         |Magic methods other than \_\_init\_\_()  |
-|Company.remove_employees       |Jordan Goodman  |Conditional statement                    |
-|Edit employee attributes       |Trinity Hill    |                                         |
-|Company.demote_manager         |Steve Tanekeu   |Sequence unpacking                       |
-|parse_args                     |Spencer Morgan  |ArgumentParser                           |
+|Method/function                 |Primary author  |Techniques demonstrated                  |
+| :----------------------------  | :------------- | :-------------------------------------- |
+|Company.write_employees_json    |Gene Yu         |json.load()                              |
+|Company.add_employees_from_file |Jordan Goodman  |Regular expression                       |
+|Company.search_employees        |Trinity Hill    |Optional parameters (keyword arguments)  |
+|Company.remove_subordinate      |Steve Tanekeu   |f-strings                                |
+|Company.add_employee            |Spencer Morgan  |Generator expression                     |
+|Employee.\_\_repr\_\_           |Gene Yu         |Magic methods other than \_\_init\_\_()  |
+|Company.add_employees_from_file |Jordan Goodman  |with statement                           |
+|Edit employee attributes        |Trinity Hill    |Conditional expression                   |
+|Company.demote_manager          |Steve Tanekeu   |Sequence unpacking                       |
+|parse_args                      |Spencer Morgan  |ArgumentParser                           |
   
 ## Sources
 * None
