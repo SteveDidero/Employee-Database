@@ -517,7 +517,7 @@ def main(file=""):
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
                 confirm = input(
-                    f"Are you sure you want to write to {file}? y/n")
+                    f"Are you sure you want to write to {file}? y/n ")
                 if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
