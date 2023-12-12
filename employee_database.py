@@ -186,12 +186,6 @@ class Company():
             self.employees = {}
             self.managers = {}
             return
-        try:
-            managers_dict = employees_info["managers"]
-        except KeyError:
-            self.managers = {}
-        else:
-            self.managers = managers_dict
         self.employees = {}
         for id,e in employees_dict.items():
             self.employees[id] = Employee(e["name"],e["gender"],e["dob"]
@@ -455,18 +449,33 @@ def main():
         if answer == 1:
             id = int(input('Enter an Id for the employee you want to add'))
             task = com.add_employee(id)
+            print(task)
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
             task = com.add_employees_from_file(file)
+            print("Task complete!")
         elif answer == 3:
             name = input("Enter the new manager's name")
             task = com.add_manager(name)
+            print("Task complete")
         elif answer == 4:
             manager = input("Enter the manager's name: ")
             name = input("Enter the employee's name: ")
             task = com.assign_employee(manager, name)
+            print("Task complete!")
         elif answer == 5:
-            print("nothing")
+            name = input("Enter the manager's name: ")
+            task = com.demote_manager('name')
+            print('Task complete!')
+        elif answer == 6:
+            Id = input("Enter the employee's ID")
+            task = com.remove_employee(Id)
+            print("task complete!")
+        elif answer == 7:
+            manager = input("Enter the manager's name: ")
+            em_name = input("Enter the name of the employee: ")
+            task = com.remove_subordinate(manager, em_name)
+            print("Task complete!")
         elif answer == 8:
             employee_id = int(input("Enter the employee's ID number: "))
             if employee_id in com.employees:
@@ -474,16 +483,13 @@ def main():
             else:
                 print(f"No employee found with ID {employee_id}")
         elif answer == 9:
-            file = input("Enter the file path to save to. Enter nothing to use "
-                "the current database file. The file will be in JSON format. ")
-            if not file:
-                file = com.employees_file
+            file = input("Enter the file path to save to. "
+                "The file will be in JSON format.")
             status = com.write_employees_json(file)
             if status == 0:
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
-                confirm = input(
-                    f"Are you sure you want to write to {file}? y/n ")
+                confirm = input(f"Are you sure you want to write to {file}? y/n")
                 if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
