@@ -14,6 +14,7 @@ from argparse import ArgumentParser
 import json
 from pathlib import Path
 import re
+import sys
 BAD_VALUES = frozenset({None, ""})
 
 class Employee():
