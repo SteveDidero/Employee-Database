@@ -455,7 +455,7 @@ def main(file=""):
     
     while True:
         print("Here are your options")
-        print("""1: Add employee manually
+        print("""                1: Add employee manually
                 2: Add employee from file
                 3: Add manager
                 4: Assign employee to manager
@@ -465,7 +465,9 @@ def main(file=""):
                 8: Modify employee data
                 9: Save company data
                 10: Search for an employee
-                11. Quit
+                11: Print all employees
+                12: Print all managers
+                99. Quit
         """)
         answer = int(input("Please enter a number: "))
 
@@ -515,7 +517,7 @@ def main(file=""):
                 print(f"Employees and managers saved to {file}.")
             elif status == 1:
                 confirm = input(
-                    f"Are you sure you want to write to {file}? y/n")
+                    f"Are you sure you want to write to {file}? y/n ")
                 if confirm.lower() == "y":
                     com.write_employees_json(file, protect_attributes=False)
                     print(f"Employees and managers saved to {file}.")
@@ -530,6 +532,12 @@ def main(file=""):
             matching = com.search_employee(first_name, last_name, department)
             print(matching)
         elif answer == 11:
+            print("All employees:")
+            print(com.employees)
+        elif answer == 12:
+            print("All managers:")
+            print(com.managers)
+        elif answer == 99:
             print("Thank you for using the Employee Management Data Center")
             break
         else:
