@@ -437,10 +437,24 @@ def main(file=""):
     if not file:
         file = "../default_employees_file.json"
     com = Company(file)
+
+    print("Hello, welcome to INST 326 Employee management data Center!")
+    print("Please review and select from the following options")
+    print("""1: Add employee manually
+                2: Add employee from file
+                3: Add manager
+                4: Assign employee to manager
+                5: Demote manager
+                6: Remove employee
+                7: Remove employee from a manager
+                8: Modify employee data
+                9: Save company data
+                10: Search for an employee
+                11. Quit
+        """)
     
     while True:
-        print("Hello, welcome to INST 326 Employee management data Center!")
-        print("Please review and select from the following options")
+        print("Here are your options")
         print("""1: Add employee manually
                 2: Add employee from file
                 3: Add manager
@@ -461,15 +475,15 @@ def main(file=""):
             print("Task complete!")
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
-            task = com.add_employees_from_file(file)
+            com.add_employees_from_file(file)
             print("Task complete!")
         elif answer == 3:
-            name = input("Enter the new manager's name")
+            name = input("Enter the new manager's name: ")
             task = com.add_manager(name)
             print("Task complete")
         elif answer == 4:
             manager = input("Enter the manager's name: ")
-            name = input("Enter the employee's name: ")
+            name = input("Enter the employee's full name: ")
             task = com.assign_employee(manager, name)
             print("Task complete!")
         elif answer == 5:
