@@ -453,9 +453,9 @@ def main():
         answer = int(input("Please enter a number: "))
 
         if answer == 1:
-            id = int(input('Enter an Id for the employee you want to add'))
-            task = com.add_employee(id)
-            print(task)
+            id = int(input('Enter an Id for the employee you want to add: '))
+            com.add_employee(id)
+            print("Task complete!")
         elif answer == 2:
             file = input("Enter your file name(example: myfile.txt): ")
             task = com.add_employees_from_file(file)
